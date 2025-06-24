@@ -395,7 +395,7 @@ export default function Portfolio() {
 							image="/store-img.png?height=400&width=600"
 							demoUrl="/projects/store-automation"
 							repoUrl="https://github.com/daechan-jo/store-automation"
-							disabled={true}
+							disabled={false}
 						/>
 						<ProjectCard
 							title="Spring WebFlux MSA Architecture"
