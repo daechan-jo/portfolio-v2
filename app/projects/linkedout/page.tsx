@@ -220,57 +220,149 @@ export default function LinkedOutPortfolio() {
 
 					<div className="mt-12 space-y-8">
 						<GlassmorphicCard expandable={false}>
-							{/*<h3 className="text-xl font-semibold mb-4">주요 성과</h3>*/}
-							<img src="/aws_architecture.png" alt="" style={{cursor: 'pointer', display: 'block', margin: '0 auto'}}
-									 onClick={() => window.open('/aws_architecture.png', '_blank')}/>
-							<br/>
-							<h3 className="text-xl font-semibold mb-4">고가용성과 수평 확장성</h3>
-							<p className="text-gray-700 leading-relaxed">
-								컨테이너화된 애플리케이션을 더 효율적으로 배포하고 관리하기 위해 ECS를 채택했습니다. AutoScaling 그룹으로 구성하여 트래픽 변화에 유동적으로 EC2인스턴스를 인/아웃 스케일링해
-								대응하여 서비스의 가용성과 확장성을 확보합니다.
-							</p>
-							<p className="text-gray-700 leading-relaxed">
-								또한 Multi-AZ 배포를 통해 두 개의 가용 영역을 사용하므로 장애 발생 시에도 서비스가 중단되지 않도록 고가용성을 보장합니다.
-							</p>
-							<br/>
-							<br/>
-							<h3 className="text-xl font-semibold mb-4">네트워크</h3>
-							<p className="text-gray-700 leading-relaxed">
-								기본적으로 중요한 리소스(서버, 데이터베이스 등)는 프라이빗 서브넷에 배치하여 외부 접근을 차단하되, NAT 게이트웨이를 통해 퍼블릭/프라이빗 서브넷 간 통신이 가능하도록 구성했습니다.
-								이를 통해 퍼블릭 서브넷의 로드 밸런서가 프라이빗 서브넷의 리소스에 트래픽을 안전하게 전달하고 분산할 수 있도록 하여 기본적인 보안을 구현했습니다.
-							</p>
-							<br/>
-							<br/>
-							<h3 className="text-xl font-semibold mb-4">CI/CD 및 모니터링</h3>
-							<p className="text-gray-700 leading-relaxed">
-								GitHub Actions를 통해 main 브랜치에 푸시 및 병합되면 자동으로 테스트를 실행하고 애플리케이션 이미지를 빌드하여 AWS ECR에 푸시합니다. 이후 AWS
-								CodePipeline이 새 이미지를 감지하면 AWS CodeBuild를 통해 ECS 서비스를 자동으로 업데이트하여 무중단 배포를 수행합니다.
-							</p>
-							<p className="text-gray-700 leading-relaxed">
-								테스트 자동화를 위해 GitHub Actions workflow에서 Jest를 실행하며, 테스트 성공 시에만 다음 단계로 진행됩니다. CodeBuild는 buildspec.yml에 정의된
-								대로 멀티 스테이지 도커 빌드를 수행해 이미지 크기를 최적화합니다.
-							</p>
-							<p className="text-gray-700 leading-relaxed">
-								ECS는 롤링 업데이트 배포 전략을 사용해 새 버전 배포 시 점진적으로 새 버전의 컨테이너를 배포하고 기존 버전을 대체합니다. 문제 발생 시 이전 버전으로 즉시 롤백이
-								가능합니다.
-							</p>
-							<p className="text-gray-700 leading-relaxed">
-							</p>
-							<br/>
-							<br/>
-							<h3 className="text-xl font-semibold mb-4">데이터 보호</h3>
-							<p className="text-gray-700 leading-relaxed">
-								최소 권한 원칙에 따라 IAM 역할과 보안 그룹을 설저하고 각 리소스에 대한 접근을 관리했습니다. 백업 및 장애대응으로 RDS의 자동 백업 기능과 복구 전략, 예비 데이터베이스를 통해
-								데이터 손실에 대비하고 안정적인 데이터 관리를 목표로 했습니다.
-							</p>
-							<br/>
-							<br/>
-							<h3 className="text-xl font-semibold mb-4">CDN</h3>
-							<p className="text-gray-700 leading-relaxed">
-								CloudFront를 도입하해 엣지 로케이션을 통해 정적 콘텐츠를 캐싱하고 빠르게 제공합니다. S3에 저장된 이미지, CSS, JavaScript 등의 정적 자원들을
-								CloudFront를 통해 배포하여 지연 시간을 최소화하고 사용자 경험을 개선했습니다. 또한 커스텀 도메인과 SSL 인증서를 CloudFront에 연결하여 S3 버킷의 콘텐츠를 메인
-								서비스 도메인과 동일한 도메인에서 안전하게 제공할 수 있었습니다.
-							</p>
+							<div className="mb-6">
+								<img src="/aws_architecture.png" alt="AWS 아키텍처 다이어그램"
+										 style={{
+											 cursor: 'pointer',
+											 display: 'block',
+											 margin: '0 auto',
+											 borderRadius: '8px',
+											 boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
+										 }}
+										 onClick={() => window.open('/aws_architecture.png', '_blank')}/>
+							</div>
+
+							<div className="space-y-8">
+								<section>
+									<h3 className="text-xl font-semibold text-gray-800 mb-4 border-b-2 border-gray-200 pb-2">고가용성과 수평
+										확장성</h3>
+									<div className="bg-gray-50 p-4 rounded-lg mb-4">
+										<h4 className="text-gray-800 font-medium mb-2">ECS 기반 컨테이너 오케스트레이션</h4>
+										<p className="text-gray-700 leading-relaxed text-sm mb-3">
+											컨테이너화된 애플리케이션의 효율적인 배포와 관리를 위해 Amazon ECS를 채택했습니다.
+											AutoScaling 그룹 구성으로 트래픽 변화에 따른 EC2 인스턴스 자동 스케일링을 통해
+											비용 효율성과 성능을 동시에 확보했습니다.
+										</p>
+										<p className="text-gray-600 text-sm">
+											<strong>Multi-AZ 배포:</strong> 두 개의 가용 영역 활용으로 단일 장애점 제거 및 99.9% 이상의 서비스 가용성 보장
+										</p>
+									</div>
+								</section>
+
+								<section>
+									<h3 className="text-xl font-semibold text-gray-800 mb-4 border-b-2 border-gray-200 pb-2">보안 네트워크
+										아키텍처</h3>
+									<div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+										<div className="bg-gray-50 p-4 rounded-lg">
+											<h4 className="text-gray-800 font-medium mb-2">계층화 보안</h4>
+											<ul className="text-gray-700 text-sm space-y-1">
+												<li>• 프라이빗 서브넷: 핵심 리소스 배치</li>
+												<li>• NAT 게이트웨이: 안전한 아웃바운드 통신</li>
+												<li>• 최소 권한 원칙 적용</li>
+											</ul>
+										</div>
+										<div className="bg-gray-50 p-4 rounded-lg">
+											<h4 className="text-gray-800 font-medium mb-2">로드 밸런싱</h4>
+											<p className="text-gray-700 text-sm">
+												퍼블릭 서브넷의 ALB가 프라이빗 서브넷 리소스로
+												트래픽을 안전하게 분산 처리합니다.
+											</p>
+										</div>
+									</div>
+								</section>
+
+								<section>
+									<h3 className="text-xl font-semibold text-gray-800 mb-4 border-b-2 border-gray-200 pb-2">자동화된 CI/CD
+										파이프라인</h3>
+									<div className="bg-gray-50 p-4 rounded-lg mb-4">
+										<h4 className="text-gray-800 font-medium mb-3">무중단 배포 프로세스</h4>
+										<div className="space-y-3">
+											<div className="flex items-start">
+												<div
+													className="w-6 h-6 bg-gray-600 text-white rounded-full flex items-center justify-center text-xs font-medium mr-3 mt-1">1
+												</div>
+												<div>
+													<h5 className="font-medium text-gray-800">GitHub Actions</h5>
+													<p className="text-sm text-gray-600">main 브랜치 푸시/병합 시 자동 테스트 및 이미지 빌드</p>
+												</div>
+											</div>
+											<div className="flex items-start">
+												<div
+													className="w-6 h-6 bg-gray-600 text-white rounded-full flex items-center justify-center text-xs font-medium mr-3 mt-1">2
+												</div>
+												<div>
+													<h5 className="font-medium text-gray-800">ECR 푸시</h5>
+													<p className="text-sm text-gray-600">컨테이너 이미지를 AWS ECR에 자동 업로드</p>
+												</div>
+											</div>
+											<div className="flex items-start">
+												<div
+													className="w-6 h-6 bg-gray-600 text-white rounded-full flex items-center justify-center text-xs font-medium mr-3 mt-1">3
+												</div>
+												<div>
+													<h5 className="font-medium text-gray-800">CodePipeline 자동 배포</h5>
+													<p className="text-sm text-gray-600">ECS 서비스 롤링 업데이트로 무중단 배포 수행</p>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+										<div className="bg-white border border-gray-200 p-3 rounded-lg">
+											<h5 className="font-medium text-gray-800 mb-1">테스트 자동화</h5>
+											<p className="text-sm text-gray-600">Jest 기반 테스트 성공 시에만 배포 진행</p>
+										</div>
+										<div className="bg-white border border-gray-200 p-3 rounded-lg">
+											<h5 className="font-medium text-gray-800 mb-1">이미지 최적화</h5>
+											<p className="text-sm text-gray-600">멀티 스테이지 도커 빌드로 이미지 크기 최소화</p>
+										</div>
+									</div>
+								</section>
+
+								<section>
+									<h3 className="text-xl font-semibold text-gray-800 mb-4 border-b-2 border-gray-200 pb-2">데이터 보호 및 백업
+										전략</h3>
+									<div className="bg-gray-50 p-4 rounded-lg">
+										<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+											<div>
+												<h4 className="text-gray-800 font-medium mb-2">접근 제어</h4>
+												<ul className="text-gray-700 text-sm space-y-1">
+													<li>• IAM 역할 기반 최소 권한 적용</li>
+													<li>• 보안 그룹을 통한 네트워크 레벨 제어</li>
+												</ul>
+											</div>
+											<div>
+												<h4 className="text-gray-800 font-medium mb-2">백업 및 복구</h4>
+												<ul className="text-gray-700 text-sm space-y-1">
+													<li>• RDS 자동 백업 및 스냅샷</li>
+													<li>• Multi-AZ 배포로 장애 대응</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</section>
+
+								<section>
+									<h3 className="text-xl font-semibold text-gray-800 mb-4 border-b-2 border-gray-200 pb-2">글로벌 CDN
+										최적화</h3>
+									<div className="bg-gray-50 p-4 rounded-lg">
+										<h4 className="text-gray-800 font-medium mb-3">CloudFront 기반 콘텐츠 배포</h4>
+										<div className="space-y-2 text-gray-700 text-sm">
+											<div className="flex items-start">
+												<span className="font-medium mr-2">•</span>
+												<span><strong>엣지 캐싱:</strong> 전 세계 엣지 로케이션을 통한 정적 콘텐츠 고속 배포</span>
+											</div>
+											<div className="flex items-start">
+												<span className="font-medium mr-2">•</span>
+												<span><strong>통합 도메인:</strong> 커스텀 도메인과 SSL 인증서 연결로 통일된 사용자 경험 제공</span>
+											</div>
+											<div className="flex items-start">
+												<span className="font-medium mr-2">•</span>
+												<span><strong>성능 최적화:</strong> 이미지, CSS, JavaScript 등 정적 자원의 지연 시간 최소화</span>
+											</div>
+										</div>
+									</div>
+								</section>
+							</div>
 						</GlassmorphicCard>
 						<br/>
 						<br/>
@@ -548,137 +640,155 @@ export default function LinkedOutPortfolio() {
 							<div className="space-y-6">
 								<img src="/getessay.png" alt="Get Essay Flow" style={{cursor: 'pointer'}}
 										 onClick={() => window.open('/getessay.png', '_blank')}/>
-								<h4 className="text-xl font-semibold text-gray-800">평판 및 트렌드 시스템</h4>
-								<p className="text-gray-700 leading-relaxed mb-4">
-									초기에는 단순한 조회수 기반 노출 방식을 사용했으나, 이는 질 낮은 컨텐츠가 상위에 노출되거나
-									오래된 인기 글이 지속적으로 상단을 차지하는 문제를 야기했습니다. 이러한 한계를 극복하고
-									플랫폼의 신뢰성과 사용자 경험을 극대화하기 위해 종합적인 평판 및 트렌드 시스템을 설계했습니다.
-								</p>
-								<p className="text-gray-700 leading-relaxed mb-4">
-									본 시스템은 사용자 활동 패턴과 에세이의 다차원적 지표를 분석하여 트렌드 점수를 산출하고,
-									이를 추천 알고리즘의 핵심 가중치로 활용합니다. 자연스럽게 양질의 컨텐츠가 상위에 노출되고,
-									상대적으로 품질이 낮은 컨텐츠는 점진적으로 하위로 순위가 조정되도록 구현했습니다.
-								</p>
-								<div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg mb-4">
-									<h5 className="text-blue-800 font-medium mb-2">🎯 시스템 개발 목표</h5>
-									<div className="text-blue-700 text-sm space-y-1">
-										<p>• 단순 조회수 중심에서 벗어난 종합적 품질 평가</p>
-										<p>• 시간 경과에 따른 자연스러운 컨텐츠 순환</p>
-										<p>• 사용자 참여도 기반의 실질적 인기도 측정</p>
-										<p>• 신규 우수 컨텐츠의 적절한 노출 기회 보장</p>
+
+								<section>
+									<h4 className="text-xl font-semibold text-gray-800 border-b-2 border-gray-200 pb-2 mb-4">평판 및 트렌드
+										시스템</h4>
+									<p className="text-gray-700 leading-relaxed mb-4">
+										초기에는 단순한 조회수 기반 노출 방식을 사용했으나, 이는 질 낮은 컨텐츠가 상위에 노출되거나
+										오래된 인기 글이 지속적으로 상단을 차지하는 문제를 야기했습니다. 이러한 한계를 극복하고
+										플랫폼의 신뢰성과 사용자 경험을 극대화하기 위해 종합적인 평판 및 트렌드 시스템을 설계했습니다.
+									</p>
+									<p className="text-gray-700 leading-relaxed mb-4">
+										본 시스템은 사용자 활동 패턴과 에세이의 다차원적 지표를 분석하여 트렌드 점수를 산출하고,
+										이를 추천 알고리즘의 핵심 가중치로 활용합니다. 자연스럽게 양질의 컨텐츠가 상위에 노출되고,
+										상대적으로 품질이 낮은 컨텐츠는 점진적으로 하위로 순위가 조정되도록 구현했습니다.
+									</p>
+									<div className="bg-gray-50 p-4 rounded-lg mb-4">
+										<h5 className="text-gray-800 font-medium mb-2">시스템 개발 목표</h5>
+										<div className="text-gray-700 text-sm space-y-1">
+											<p>• 단순 조회수 중심에서 벗어난 종합적 품질 평가</p>
+											<p>• 시간 경과에 따른 자연스러운 컨텐츠 순환</p>
+											<p>• 사용자 참여도 기반의 실질적 인기도 측정</p>
+											<p>• 신규 우수 컨텐츠의 적절한 노출 기회 보장</p>
+										</div>
 									</div>
-								</div>
-								<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-									<div className="bg-green-50 p-4 rounded-lg">
-										<h6 className="text-green-800 font-medium mb-2">📈 품질 향상 효과</h6>
-										<p className="text-green-700 text-sm">
-											양질의 컨텐츠가 자연스럽게 상위 노출되어
-											전체적인 플랫폼 품질 향상
+									<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+										<div className="bg-gray-50 p-4 rounded-lg">
+											<h6 className="text-gray-800 font-medium mb-2">품질 향상 효과</h6>
+											<p className="text-gray-600 text-sm">
+												양질의 컨텐츠가 자연스럽게 상위 노출되어
+												전체적인 플랫폼 품질 향상
+											</p>
+										</div>
+										<div className="bg-gray-50 p-4 rounded-lg">
+											<h6 className="text-gray-800 font-medium mb-2">컨텐츠 순환</h6>
+											<p className="text-gray-600 text-sm">
+												시간 기반 감쇠를 통한 건전한
+												컨텐츠 생태계 조성
+											</p>
+										</div>
+									</div>
+								</section>
+
+								<section>
+									<h4 className="text-xl font-semibold text-gray-800 border-b-2 border-gray-200 pb-2 mb-4">트렌드 점수 관리
+										알고리즘</h4>
+									<p className="text-gray-700 leading-relaxed mb-4">
+										에세이의 인기도를 정확하게 반영하기 위해 조회수 기반 점수 증가와 시간 기반 감쇠 계수를 결합한 알고리즘을 구현했습니다.
+										최신성과 인기도의 균형을 맞추기 위해 작성일 기준으로 시간이 경과할수록 점수가 감소하도록 설계했습니다.
+									</p>
+									<p className="text-gray-700 leading-relaxed mb-4">
+										이 방식을 도입한 배경은 사용자들이 컨텐츠를 조회할수록 점수가 지속적으로 증가하여 오래된 컨텐츠가
+										상위에 계속 노출되는 문제를 해결하기 위함이었습니다. 작성일이 트렌드 점수 가중치에 포함되어 있었지만,
+										보다 적극적인 감쇠 로직이 필요하다고 판단했습니다.
+									</p>
+									<div className="bg-gray-50 p-4 rounded-lg">
+										<p className="text-gray-800 font-medium mb-3">감쇠 로직 상세</p>
+										<div className="space-y-2 text-gray-700">
+											<div className="flex items-center">
+												<span className="w-2 h-2 bg-gray-500 rounded-full mr-3"></span>
+												<span><strong>생성 후 7일 이내:</strong> 감쇠 미적용 (100% 유지)</span>
+											</div>
+											<div className="flex items-center">
+												<span className="w-2 h-2 bg-gray-600 rounded-full mr-3"></span>
+												<span><strong>7일 이후:</strong> 0.995^N 감쇠 계수 적용 (N = 경과일수 - 7)</span>
+											</div>
+											<div className="bg-white p-3 rounded border border-gray-200 mt-3">
+												<p className="text-sm font-medium text-gray-800 mb-1">계산 예시</p>
+												<p className="text-sm text-gray-700">
+													작성 후 10일 경과: 100 × 0.995³ ≈ 98.5점<br/>
+													조회 시 점수 갱신: 98.5 + 1(조회 가중치) = 99.5 → 99점 (소수점 버림)
+												</p>
+											</div>
+										</div>
+									</div>
+								</section>
+
+								<section>
+									<h4 className="text-xl font-semibold text-gray-800 border-b-2 border-gray-200 pb-2 mb-4">조회 성능 최적화:
+										동시성 문제 해결</h4>
+									<p className="text-gray-700 leading-relaxed mb-4">
+										사용자 컨텐츠 조회 시 조회수, 작성자 평판, 트렌드 점수 등 여러 테이블을 실시간으로 업데이트하는 구조에서 동시 사용자 증가로 인한 성능 병목 현상이 발생했습니다. 이를 해결하기
+										위해 단계적 최적화 과정을 통해 확장 가능한 아키텍처로 개선했습니다.
+									</p>
+
+									<div className="bg-gray-50 p-4 rounded-lg mb-4">
+										<h5 className="text-gray-800 font-medium mb-2">기존 시스템의 문제점</h5>
+										<img src="/agg1.png" alt="기존 실시간 업데이트 구조"
+												 style={{cursor: 'pointer', display: 'block', margin: '0 auto', marginBottom: '12px'}}
+												 onClick={() => window.open('/agg1.png', '_blank')}/>
+										<div className="space-y-2 text-gray-700 text-sm">
+											<div className="flex items-start">
+												<span className="font-medium mr-2">•</span>
+												<span><strong>락 경합:</strong> 동일 컨텐츠에 대한 동시 조회 시 UPDATE 작업에서 락 경합 발생</span>
+											</div>
+											<div className="flex items-start">
+												<span className="font-medium mr-2">•</span>
+												<span><strong>트랜잭션 지연:</strong> 여러 테이블 순차 업데이트로 인한 전체 트랜잭션 지연</span>
+											</div>
+											<div className="flex items-start">
+												<span className="font-medium mr-2">•</span>
+												<span><strong>데드락 위험:</strong> 테이블 간 업데이트 순서 불일치로 인한 데드락 발생 가능성</span>
+											</div>
+										</div>
+									</div>
+
+									<div className="bg-gray-50 p-4 rounded-lg mb-4">
+										<h5 className="text-gray-800 font-medium mb-3">1단계: 집계 테이블 도입</h5>
+										<p className="text-gray-700 text-sm mb-3">
+											실시간 업데이트 방식에서 배치 처리 방식으로 전환하여 성능 문제를 해결했습니다.
+										</p>
+										<p className="text-gray-700 text-sm">
+											<strong>개선 방안:</strong> 사용자 요청 시 임시 집계 테이블에만 데이터 저장하고,
+											주기적인 크론작업을 통해 실제 테이블로 일괄 업데이트하는 배치 처리 방식 구현
 										</p>
 									</div>
-									<div className="bg-purple-50 p-4 rounded-lg">
-										<h6 className="text-purple-800 font-medium mb-2">🔄 컨텐츠 순환</h6>
-										<p className="text-purple-700 text-sm">
-											시간 기반 감쇠를 통한 건전한
-											컨텐츠 생태계 조성
+
+									<div className="bg-gray-50 p-4 rounded-lg mb-4">
+										<h5 className="text-gray-800 font-medium mb-3">2단계: 분산 락 적용</h5>
+										<p className="text-gray-700 text-sm mb-3">
+											집계 테이블 또한 동시성 이슈가 존재하여 분산 락을 추가로 적용했습니다.
 										</p>
-									</div>
-								</div>
-								<br/>
-								<br/>
-								<h4 className="text-xl font-semibold text-gray-800">트렌드 점수 관리 알고리즘</h4>
-								<p className="text-gray-700 leading-relaxed mb-4">
-									에세이의 인기도를 정확하게 반영하기 위해 조회수 기반 점수 증가와 시간 기반 감쇠 계수를 결합한 알고리즘을 구현했습니다.
-									최신성과 인기도의 균형을 맞추기 위해 작성일 기준으로 시간이 경과할수록 점수가 감소하도록 설계했습니다.
-								</p>
-								<p className="text-gray-700 leading-relaxed mb-4">
-									이 방식을 도입한 배경은 사용자들이 컨텐츠를 조회할수록 점수가 지속적으로 증가하여 오래된 컨텐츠가
-									상위에 계속 노출되는 문제를 해결하기 위함이었습니다. 작성일이 트렌드 점수 가중치에 포함되어 있었지만,
-									보다 적극적인 감쇠 로직이 필요하다고 판단했습니다.
-								</p>
-								<div className="bg-gray-50 p-4 rounded-lg">
-									<p className="text-gray-800 font-medium mb-3">📊 감쇠 로직 상세</p>
-									<div className="space-y-2 text-gray-700">
-										<div className="flex items-center">
-											<span className="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
-											<span><strong>생성 후 7일 이내:</strong> 감쇠 미적용 (100% 유지)</span>
-										</div>
-										<div className="flex items-center">
-											<span className="w-2 h-2 bg-orange-500 rounded-full mr-3"></span>
-											<span><strong>7일 이후:</strong> 0.995^N 감쇠 계수 적용 (N = 경과일수 - 7)</span>
-										</div>
-										<div className="bg-white p-3 rounded border-l-4 border-blue-500 mt-3">
-											<p className="text-sm font-medium text-blue-800 mb-1">계산 예시</p>
-											<p className="text-sm text-gray-700">
-												작성 후 10일 경과: 100 × 0.995³ ≈ 98.5점<br/>
-												조회 시 점수 갱신: 98.5 + 1(조회 가중치) = 99.5 → 99점 (소수점 버림)
-											</p>
-										</div>
-									</div>
-								</div>
-								<br/>
-								<br/>
-								<h4 className="text-xl font-semibold text-gray-800">성능 최적화: 집계 테이블과 비동기 처리</h4>
-								<p className="text-gray-700 leading-relaxed mb-4">
-									에세이 조회 시 사용자 평판, 트렌드 점수, 상호작용 데이터 등 여러 테이블을 동시에 조회하고 변경해야 하는
-									복잡한 워크플로우로 인해 레이턴시 증가와 데이터베이스 락 경합 문제가 발생했습니다.
-								</p>
 
-								<div className="bg-gray-50 p-4 rounded-lg mb-4">
-									<h5 className="text-gray-800 font-medium mb-3">🔄 최적화 진화 과정</h5>
-
-									<div className="space-y-4">
-										<div className="border-l-4 border-red-400 pl-4">
-											<h6 className="font-medium text-red-700 mb-1">1단계: 문제 발생</h6>
-											<p className="text-sm text-red-600">
-												다중 테이블 동시 조회/변경으로 인한 성능 저하 및 락 경합 발생
-											</p>
-										</div>
-
-										<div className="border-l-4 border-yellow-400 pl-4">
-											<h6 className="font-medium text-yellow-700 mb-1">2단계: 집계 테이블 도입</h6>
-											<p className="text-sm text-yellow-600 mb-2">
-												사용자 평판과 에세이 트렌드 점수를 별도 집계 테이블로 분리하고 크론 작업으로 주기적 일괄 업데이트
-											</p>
-											<div className="bg-yellow-50 p-2 rounded text-xs text-yellow-800">
-												<strong>한계점:</strong> 실시간성이 중요한 추천 시스템에서 크론 작업 실행 전까지 더티리드 발생
+										<div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-3">
+											<div className="bg-white p-3 rounded border border-gray-200">
+												<h6 className="font-medium text-gray-800 mb-1">비관적 락의 한계</h6>
+												<p className="text-sm text-gray-600">
+													락 대기 중 커넥션 유지로 인한 커넥션 풀 부족 현상 발생
+												</p>
+											</div>
+											<div className="bg-white p-3 rounded border border-gray-200">
+												<h6 className="font-medium text-gray-800 mb-1">Redis 분산 락 채택</h6>
+												<p className="text-sm text-gray-600">
+													락 획득 전 커넥션 생성하지 않아 리소스 효율성 향상
+												</p>
 											</div>
 										</div>
 
-										<div className="border-l-4 border-green-400 pl-4">
-											<h6 className="font-medium text-green-700 mb-1">3단계: 비동기 처리 최적화</h6>
-											<p className="text-sm text-green-600">
-												집계 테이블 대신 비동기 처리 방식 채택으로 실시간성과 성능을 동시에 확보
-											</p>
+										<div className="bg-white p-3 rounded border border-gray-200">
+											<h6 className="font-medium text-gray-800 mb-2">분산 락의 장점</h6>
+											<ul className="text-sm text-gray-700 space-y-1">
+												<li>• <strong>커넥션 풀 최적화:</strong> 락 대기 중 커넥션 미점유로 리소스 효율성 극대화</li>
+												<li>• <strong>통합 락 관리:</strong> 여러 서비스 인스턴스 간 동일 레코드에 대한 락 통일 관리</li>
+												<li>• <strong>확장성 보장:</strong> MSA 환경에서도 일관된 동시성 제어 가능</li>
+											</ul>
+											<img src="/agg2.png" alt="집계 테이블 기반 배치 처리 구조"
+													 style={{cursor: 'pointer', display: 'block', margin: '12px auto 0'}}
+													 onClick={() => window.open('/agg2.png', '_blank')}/>
 										</div>
 									</div>
-								</div>
-
-								<div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-									<div className="bg-blue-50 p-4 rounded-lg">
-										<h6 className="text-blue-800 font-medium mb-2">⚡ 성능 개선 효과</h6>
-										<ul className="text-blue-700 text-sm space-y-1">
-											<li>• 메인 조회 플로우 응답 시간 단축</li>
-											<li>• 데이터베이스 락 경합 현상 제거</li>
-											<li>• 동시 처리 능력 향상</li>
-										</ul>
-									</div>
-
-									<div className="bg-green-50 p-4 rounded-lg">
-										<h6 className="text-green-800 font-medium mb-2">🎯 데이터 정확성 보장</h6>
-										<ul className="text-green-700 text-sm space-y-1">
-											<li>• 실시간 데이터 동기화</li>
-											<li>• 더티리드 문제 해결</li>
-											<li>• 추천 시스템 정확도 향상</li>
-										</ul>
-									</div>
-								</div>
-
-								<p className="text-gray-700 leading-relaxed">
-									최종적으로 비동기 처리 방식을 통해 메인 조회 플로우를 방해하지 않으면서도
-									필요한 데이터의 정확성을 보장하고, 동시에 서비스 전반의 성능을 개선할 수 있었습니다.
-									이러한 아키텍처 개선을 통해 사용자 경험과 시스템 안정성을 모두 향상시켰습니다.
-								</p>
+								</section>
 							</div>
 						</GlassmorphicCard>
 
@@ -686,26 +796,141 @@ export default function LinkedOutPortfolio() {
 						<br/>
 						<GlassmorphicCard expandable={false}>
 							<div className="space-y-6">
-								<img src="/recommend.png" alt="" style={{cursor: 'pointer'}}
+								<img src="/recommend.png" alt="추천 시스템 다이어그램" style={{cursor: 'pointer'}}
 										 onClick={() => window.open('/recommend.png', '_blank')}/>
-								<h4 className="text-lg font-semibold text-gray-800">추천 에세이</h4>
-								<p className="text-gray-700 leading-relaxed">
-									사용자가 최근 조회한 컨텐츠, 북마크 수, 트렌드/작성자 평판 점수, 태그 등 다양한 데이터를 활용해 최근 활동과 선호도 및 여러 가중치를 반영하여 보다 개인화된 추천을
-									제공합니다. 특히 리스트를 응답할 땐 대역폭 및 클라이언트의 메모리사용량을 줄이기 위해 본문을 가공하여 리소스를 절약함과 동시에 사용자에게 미리보기를 제공하여 대략적인
-									내용을 파악할 수 있도록 했습니다.
-								</p>
-								<br/>
-								<h4 className="text-lg font-semibold text-gray-800">최근 활동 기반 태그 수집</h4>
-								<p className="text-gray-700 leading-relaxed">
-									사용자가 최근에 조회한 컨테느의 태그를 수집해 최근 태그 목록을 만들어 사용자의 현재 관심사의 에세이를 추천하도록 반영했습니다. 예를 들어 사용자가 최근에 본 에세이들에서
-									"자기계발", "여행" 등의 태그가 있다면 이 태그들이 최근 태그 목록에 포함되고 추천에세이 가중치에 적용됩니다.
-								</p>
-								<br/>
-								<h4 className="text-lg font-semibold text-gray-800">필터링</h4>
-								<p className="text-gray-700 leading-relaxed">
-									추천 에세이에 부적절한 콘텐츠로 신고되었거나 작성자가 비공개로 전환하는 등 다양한 경우에 대응해 사용자에게 노출되지 않도록 필터링됩니다. 사용자 본인이 신고한 에세이의 경우 처분
-									결과와는 별개로 즉시 신고자에게 노출을 제한하여 사용자의 불쾌감을 줄입니다.
-								</p>
+
+								<section>
+									<h4 className="text-xl font-semibold text-gray-800 border-b-2 border-gray-200 pb-2 mb-4">개인화 추천
+										시스템</h4>
+									<p className="text-gray-700 leading-relaxed mb-4">
+										단순한 인기도 기반 추천에서 벗어나 사용자 개별 특성을 반영한 개인화 추천 시스템을 구현했습니다.
+										사용자의 최근 조회 컨텐츠의 태그 분석을 통한 선호도 파악과 컨텐츠의 트렌드 점수,
+										작성자 평판 등의 품질 지표를 종합적으로 분석하여 맞춤형 추천을 제공합니다.
+									</p>
+
+									<div className="bg-gray-50 p-4 rounded-lg mb-4">
+										<h5 className="text-gray-800 font-medium mb-3">추천 알고리즘 핵심 요소</h5>
+										<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+											<div className="bg-white p-4 rounded-lg border border-gray-200">
+												<h6 className="font-medium text-gray-800 mb-2">태그 기반 선호도 분석</h6>
+												<p className="text-sm text-gray-600 leading-relaxed">
+													사용자가 최근 조회한 컨텐츠들의 태그를 추적하여
+													관심 분야와 선호 패턴을 분석
+												</p>
+											</div>
+											<div className="bg-white p-4 rounded-lg border border-gray-200">
+												<h6 className="font-medium text-gray-800 mb-2">컨텐츠 품질 지표</h6>
+												<ul className="text-sm text-gray-600 space-y-1">
+													<li>• 트렌드 점수 (시간 감쇠 적용)</li>
+													<li>• 작성자 평판 점수</li>
+													<li>• 사용자 참여도</li>
+													<li>• 컨텐츠 신선도</li>
+												</ul>
+											</div>
+											<div className="bg-white p-4 rounded-lg border border-gray-200">
+												<h6 className="font-medium text-gray-800 mb-2">가중치 통합</h6>
+												<p className="text-sm text-gray-600 leading-relaxed">
+													태그 매칭도와 품질 지표를
+													종합하여 개인화된 추천 점수 산출
+												</p>
+											</div>
+										</div>
+									</div>
+
+									<div className="bg-gray-50 p-4 rounded-lg mb-4">
+										<h5 className="text-gray-800 font-medium mb-2">성능 최적화 전략</h5>
+										<p className="text-gray-700 leading-relaxed mb-3">
+											추천 리스트 응답 시 대역폭 사용량을 최소화하기 위해 컨텐츠 본문을 지능적으로 요약하여
+											데이터 전송량을 대폭 줄이면서도 사용자에게 유의미한 미리보기를 제공했습니다.
+										</p>
+										<div className="bg-white p-3 rounded border border-gray-200">
+											<h6 className="font-medium text-gray-800 mb-2">스마트 컨텐츠 요약</h6>
+											<div className="space-y-2">
+												<p className="text-sm text-gray-700">
+													<strong>추천 리스트:</strong> 원본 본문을 핵심 내용 중심으로 가공하여 전송 데이터 크기를 줄이고,
+													사용자가 컨텐츠의 대략적인 내용을 파악할 수 있는 미리보기 제공
+												</p>
+												<p className="text-sm text-gray-700">
+													<strong>검색 결과:</strong> 키워드가 포함된 검색 요청 시, 해당 키워드를 중심으로 한
+													맥락적 미리보기를 추출하여 검색 의도와 일치하는 구간을 우선 노출
+												</p>
+											</div>
+										</div>
+									</div>
+								</section>
+
+								<section>
+									<h4 className="text-xl font-semibold text-gray-800 border-b-2 border-gray-200 pb-2 mb-4">공정한 컨텐츠 필터링
+										시스템</h4>
+									<p className="text-gray-700 leading-relaxed mb-4">
+										신고자와 피신고자 모두에게 공평한 처리를 보장하는 필터링 시스템을 구현했습니다.
+										사용자가 신고한 컨텐츠는 관리자의 검토 완료 전까지 해당 신고자에게만 노출을 제한하여
+										불쾌감을 줄이면서도, 다른 사용자들에게는 정상적으로 노출되어 무분별한 신고로 인한
+										컨텐츠 제작자의 피해를 방지했습니다.
+									</p>
+
+									<div className="bg-gray-50 p-4 rounded-lg mb-4">
+										<h5 className="text-gray-800 font-medium mb-3">공정성 원칙</h5>
+										<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+											<div className="bg-white p-3 rounded border border-gray-200">
+												<h6 className="font-medium text-gray-800 mb-2">신고자 보호</h6>
+												<p className="text-sm text-gray-600">
+													신고한 컨텐츠가 즉시 개인 피드에서 차단되어
+													불쾌한 경험을 반복하지 않도록 보장
+												</p>
+											</div>
+											<div className="bg-white p-3 rounded border border-gray-200">
+												<h6 className="font-medium text-gray-800 mb-2">작성자 보호</h6>
+												<p className="text-sm text-gray-600">
+													관리자 검토 완료 전까지 다른 사용자에게는
+													정상 노출되어 무분별한 신고로부터 보호
+												</p>
+											</div>
+										</div>
+									</div>
+
+									<div className="bg-gray-50 p-4 rounded-lg mb-4">
+										<h5 className="text-gray-800 font-medium mb-3">필터링 프로세스</h5>
+										<div className="space-y-3">
+											<div className="flex items-start">
+												<div
+													className="w-6 h-6 bg-gray-600 text-white rounded-full flex items-center justify-center text-xs font-medium mr-3 mt-1">1
+												</div>
+												<div>
+													<h6 className="font-medium text-gray-800">신고 접수</h6>
+													<p className="text-sm text-gray-600">사용자가 부적절한 컨텐츠를 신고</p>
+												</div>
+											</div>
+											<div className="flex items-start">
+												<div
+													className="w-6 h-6 bg-gray-600 text-white rounded-full flex items-center justify-center text-xs font-medium mr-3 mt-1">2
+												</div>
+												<div>
+													<h6 className="font-medium text-gray-800">선택적 차단</h6>
+													<p className="text-sm text-gray-600">신고자에게만 즉시 노출 제한, 다른 사용자에게는 정상 노출</p>
+												</div>
+											</div>
+											<div className="flex items-start">
+												<div
+													className="w-6 h-6 bg-gray-600 text-white rounded-full flex items-center justify-center text-xs font-medium mr-3 mt-1">3
+												</div>
+												<div>
+													<h6 className="font-medium text-gray-800">관리자 검토</h6>
+													<p className="text-sm text-gray-600">관리자가 신고 내용의 적절성을 판단</p>
+												</div>
+											</div>
+											<div className="flex items-start">
+												<div
+													className="w-6 h-6 bg-gray-600 text-white rounded-full flex items-center justify-center text-xs font-medium mr-3 mt-1">4
+												</div>
+												<div>
+													<h6 className="font-medium text-gray-800">최종 처리</h6>
+													<p className="text-sm text-gray-600">검토 결과에 따라 전체 차단 또는 신고 기각</p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</section>
 							</div>
 						</GlassmorphicCard>
 
@@ -715,7 +940,7 @@ export default function LinkedOutPortfolio() {
 							<div className="space-y-6">
 								<img src="/trgin.png" alt="" style={{cursor: 'pointer', display: 'block', margin: '0 auto'}}
 										 onClick={() => window.open('/trgin.png', '_blank')}/>
-								<h4 className="text-lg font-semibold text-gray-800">유사도 검색</h4>
+								<h4 className="text-xl font-semibold text-gray-800">유사도 검색</h4>
 								<p className="text-gray-700 leading-relaxed">
 									대용량 텍스트 데이터에서 LIKE 방식의 성능 한계를 해결하기 위해 PostgreSQL의 Trigram 기반 검색을 도입했습니다.
 								</p>
@@ -731,7 +956,7 @@ export default function LinkedOutPortfolio() {
 						<br/>
 						<GlassmorphicCard expandable={false}>
 							<div className="space-y-6">
-								<h4 className="text-lg font-semibold text-gray-800">조회 성능 최적화</h4>
+								<h4 className="text-xl font-semibold text-gray-800">조회 성능 최적화</h4>
 								<p className="text-gray-700 leading-relaxed">
 									사용자가 컨텐츠를 조회할 때마다 조회수, 작성자 평판, 트렌드 점수 등 여러 테이블을 실시간으로 업데이트하는 구조였습니다. 하지만 동시 사용자가 증가하면서 성능 문제가 발생할 수
 									있었는데, 여러 사용자가 동일한 컨텐츠를 조회할 때 UPDATE 작업에서 락 경합이 발생해 레이턴시를 늘리고, 하나의 요청에서 여러 테이블을 순차적으로 업데이트하다 보니 전체
@@ -762,7 +987,7 @@ export default function LinkedOutPortfolio() {
 						<br/>
 						<GlassmorphicCard expandable={false}>
 							<div className="space-y-6">
-								<h4 className="text-lg font-semibold text-gray-800">배치 시스템</h4>
+								<h4 className="text-xl font-semibold text-gray-800">배치 시스템</h4>
 								<p className="text-gray-700 leading-relaxed">
 									제한된 서버 리소스에서 다양한 서비스들 중 많은 데이터를 한꺼번에 처리하는 작업은 자칫 성능에 영향을 줄 수 있었습니다. 특히 대규모 데이터베이스 업데이트나 많은 연산을 필요로 하는
 									작업은 서버 다운이나 불필요한 수평확장으로 비용을 증가시킬 수 있었습니다.
@@ -782,7 +1007,7 @@ export default function LinkedOutPortfolio() {
 						<br/>
 						<GlassmorphicCard expandable={false}>
 							<div className="space-y-6">
-								<h4 className="text-lg font-semibold text-gray-800">부하/수평확장 테스트</h4>
+								<h4 className="text-xl font-semibold text-gray-800">부하/수평확장 테스트</h4>
 								<p className="text-gray-700 leading-relaxed">
 									각각의 인스턴스의 최대 요청 처리량과 ECS 기반의 컨테이너 오케스트레이션이 트래픽 증가에 따라 자동으로 수평적 확장을 잘 수행하는지 검증하기 위해 테스트를 진행했습니다. ECS는
 									서비스에서 사용중인 CPU 평균 사용률이 지정한 시간동안 유지되면 자동으로 새로운 인스턴스를 추가하고 실행중인 태스크를 적용합니다.
@@ -836,7 +1061,7 @@ default ✓ [======================================] 000/800 VUs  29m0s
 							</div>
 							<br/>
 							<div className="space-y-6">
-								<h4 className="text-lg font-semibold text-gray-800">테스트 결과</h4>
+								<h4 className="text-xl font-semibold text-gray-800">테스트 결과</h4>
 								<img src="/loadtest.png" alt="" style={{cursor: 'pointer', display: 'block', margin: '0 auto'}}
 										 onClick={() => window.open('/loadtest.png', '_blank')}/>
 								<p className="text-gray-700 leading-relaxed">
@@ -878,7 +1103,7 @@ default ✓ [======================================] 000/800 VUs  29m0s
 						<br/>
 						<GlassmorphicCard expandable={false}>
 							<div className="space-y-6">
-								<h4 className="text-lg font-semibold text-gray-800">관리자페이지 및 역할기반 접근제어</h4>
+								<h4 className="text-xl font-semibold text-gray-800">관리자페이지 및 역할기반 접근제어</h4>
 								<br/>
 								<img src="/rbac.png" alt="" style={{cursor: 'pointer', display: 'block', margin: '0 auto'}}
 										 onClick={() => window.open('/rbac.png', '_blank')}/>
@@ -893,7 +1118,7 @@ default ✓ [======================================] 000/800 VUs  29m0s
 									할 수 있도록 하였습니다.
 								</p>
 								<br/>
-								<h4 className="text-lg font-semibold text-gray-800">서버 상태 관리</h4>
+								<h4 className="text-xl font-semibold text-gray-800">서버 상태 관리</h4>
 								<p className="text-gray-700 leading-relaxed">
 									서버는 AWS 인프라를 기반으로 배포되어 운영되고 있고 이 환경은 다양한 서비스와 인프라가 복잡하게 얽혀 있기 때문에 이를 수동으로 제한하거나 개방하는 작업은 부담스럽고, 긴급한
 									상황에서 급하게 직접적으로 조정하려다 휴면에러를 범할 가능성이 있기 때문에 서버 상태 관리 기능을 추가함으로써 관리자는 단순한 조작으로 서버의 상태를 변경해 다양한 변수에 신속하게
@@ -913,7 +1138,7 @@ default ✓ [======================================] 000/800 VUs  29m0s
 						<br/>
 						<GlassmorphicCard expandable={false}>
 							<div className="space-y-6">
-								<h4 className="text-lg font-semibold text-gray-800">인증/인가 및 토큰 관리</h4>
+								<h4 className="text-xl font-semibold text-gray-800">인증/인가 및 토큰 관리</h4>
 								<br/>
 								<p className="text-gray-700 leading-relaxed">
 									일반적인 JWT 인증 구현에서는 Access Token(AT)이 만료되면 클라이언트가 401 Unauthorized 응답을 받고, 이를 감지한 후 별도의 토큰 갱신 API를 호출하여
@@ -969,7 +1194,7 @@ default ✓ [======================================] 000/800 VUs  29m0s
 								</p>
 								<br/>
 								<br/>
-								<h4 className="text-lg font-semibold text-gray-800">토큰 버전 관리</h4>
+								<h4 className="text-xl font-semibold text-gray-800">토큰 버전 관리</h4>
 								<br/>
 								<p className="text-gray-700 leading-relaxed">
 									초기에는 비정상적인 접근이 가지되었을 때 Redis에 해당 RT를 블랙리스트 처리하는 방식을
@@ -990,7 +1215,7 @@ default ✓ [======================================] 000/800 VUs  29m0s
 						<br/>
 						<GlassmorphicCard expandable={false}>
 							<div className="space-y-6">
-								<h4 className="text-lg font-semibold text-gray-800">DevOps 및 배포</h4>
+								<h4 className="text-xl font-semibold text-gray-800">DevOps 및 배포</h4>
 								<br/>
 								<img src="/cicd1.png" alt="" style={{cursor: 'pointer', display: 'block', margin: '0 auto'}}
 										 onClick={() => window.open('/cicd1.png', '_blank')}/>
@@ -999,7 +1224,7 @@ default ✓ [======================================] 000/800 VUs  29m0s
 									수정으로 생산성을 향상시켰습니다. 또한 점진적 배포와 모니터링을 통해 리스크를 줄이면서 신속하고 안정적인 새로운 기능과 개선사항을 제공할 수 있었습니다.
 								</p>
 								<br/>
-								<h4 className="text-lg font-semibold text-gray-800">무중단 배포</h4>
+								<h4 className="text-xl font-semibold text-gray-800">무중단 배포</h4>
 								<p className="text-gray-700 leading-relaxed">
 									파이프라인 구축에 중요한 요소 중 하나는 무중단 배포 구현이였습니다. ECS를 사용중이였기엔 선택지는 Blue/Green 또는 RollingUpdate 두 가지 였습니다. 두 방법
 									모두 안정적인 무중단 배포를 지원하지만 방식에 뚜렷한 차이가 있어 고려해야 될 부분이 있었습니다.
@@ -1033,7 +1258,7 @@ default ✓ [======================================] 000/800 VUs  29m0s
 						<br/>
 						<GlassmorphicCard expandable={false}>
 							<div className="space-y-6">
-								<h4 className="text-lg font-semibold text-gray-800">컨테이너 오케스트레이션</h4>
+								<h4 className="text-xl font-semibold text-gray-800">컨테이너 오케스트레이션</h4>
 								<img src="/ecs.png" alt="" style={{cursor: 'pointer', display: 'block', margin: '0 auto'}}
 										 onClick={() => window.open('/ecs.png', '_blank')}/>
 								<p className="text-gray-700 leading-relaxed">
@@ -1057,7 +1282,7 @@ default ✓ [======================================] 000/800 VUs  29m0s
 						<br/>
 						<GlassmorphicCard expandable={false}>
 							<div className="space-y-6">
-								<h4 className="text-lg font-semibold text-gray-800">모니터링 및 로깅</h4>
+								<h4 className="text-xl font-semibold text-gray-800">모니터링 및 로깅</h4>
 								<img src="/cloudwatch.png" alt="" style={{cursor: 'pointer', display: 'block', margin: '0 auto'}}
 										 onClick={() => window.open('/cloudwatch.png', '_blank')}/>
 								<p className="text-gray-700 leading-relaxed">
