@@ -1730,135 +1730,104 @@ default ✓ [======================================] 000/800 VUs  29m0s
 					<div className="mt-12 space-y-8">
 						<GlassmorphicCard expandable={false}>
 							<h3 className="text-xl font-semibold mb-4">주요 성과</h3>
-							<ul className="space-y-3 text-gray-700">
-								<li>
-									<b>✅ 서비스 기획부터 출시까지 E2E 경험</b>
-									<p className="text-gray-700 leading-relaxed">
+							<div className="space-y-3">
+								<div className="bg-white p-3 rounded border border-gray-200">
+									<h6 className="font-medium text-gray-800 mb-2">✅ 서비스 기획부터 출시까지 E2E 경험</h6>
+									<p className="text-sm text-gray-600">
 										단순한 개발 업무를 넘어 서비스 기회, 기술 스택 선정, 아키텍처 설계, 개발, 운영까지 전 과정을 경험했습니다. 사용자 요구사항 분석부터 시작해서 MVP 정의, 기능 우선순위
-										결정, 그리고 실제 출시까지 서비스의 개발 생명주기를 완주했습니다.
-									</p>
-									<p className="text-gray-700 leading-relaxed">
-										특히 혼자서 백엔드와 인프라를 모두 책임지면서 기술적 의사결정의 중요성을 깨달았습니다. 제한된 자원과 시간 내에서 최적의 결과를 도출하기 위한 우선순위 설정, 기술 부채 관리,
-										그리고 확장 가능한 아키텍처 설계 능력을 기를 수 있었습니다.
-									</p>
-									<p className="text-gray-700 leading-relaxed">
-										설제 프로덕션 환경에서 서비스를 운영하면서 코드 품질의 중요성, 모니터링의 필요성, 그리고 장애 대응 능력의 중요성을 실감했습니다. 이러한 경험을 통해 단순한 개발자를 넘어서
+										결정, 그리고 실제 출시까지 서비스의 개발 생명주기를 완주했습니다. 특히 혼자서 백엔드와 인프라를 모두 책임지면서 기술적 의사결정의 중요성을 깨달았습니다. 제한된 자원과 시간
+										내에서
+										최적의 결과를 도출하기 위한 우선순위 설정, 기술 부채 관리,
+										그리고 확장 가능한 아키텍처 설계 능력을 기를 수 있었습니다. 설제 프로덕션 환경에서 서비스를 운영하면서 코드 품질의 중요성, 모니터링의 필요성, 그리고 장애 대응 능력의 중요성을
+										실감했습니다. 이러한 경험을 통해 단순한 개발자를 넘어서
 										서비스의 전체적인 그림을 그릴 수 있는 역량을 갖추게 되었습니다.
 									</p>
-								</li>
-								<li>
-									<b>✅ NestJS 프레임워크 심화 학습</b>
-									<p className="text-gray-700 leading-relaxed">
+								</div>
+								<div className="bg-white p-3 rounded border border-gray-200">
+									<h6 className="font-medium text-gray-800 mb-2">✅ NestJS 프레임워크 심화 학습</h6>
+									<p className="text-sm text-gray-600">
 										Node.js 기반의 엔터프라이즈급 프레임워크인 NestJS의 핵심 동작 원리를 체득했습니다. Dependency Injection을 통한 느슨한 결합과 테스트 가능한 코드 구조,
-										IoC 컨테이너를 통한 객체 생명주기 관리, 그리고 싱글톤 패턴 기반의 효율적인 메모리 사용을 실전에서 경험했습니다.
-									</p>
-									<p className="text-gray-700 leading-relaxed">
-										Decorator 패턴을 활용한 메타데이터 기반 프로그래밍과 Guard, Interceptor, Pipe를 이용한 횡단 관심사 처리 방식을 통해 관심사 분리와 코드 재사용성을
+										IoC 컨테이너를 통한 객체 생명주기 관리, 그리고 싱글톤 패턴 기반의 효율적인 메모리 사용을 실전에서 경험했습니다. Decorator 패턴을 활용한 메타데이터 기반 프로그래밍과
+										Guard, Interceptor, Pipe를 이용한 횡단 관심사 처리 방식을 통해 관심사 분리와 코드 재사용성을
 										극대화할 수 있었습니다. 모듈 시스템을 통한 기능별 캡슐화와 Provider 패턴을 활용한 서비스 레이어 설계로 확장 가능하고 유지보수하기 쉬운 백엔드 아키텍처를 구축했습니다.
 									</p>
-								</li>
-								<li>
-									<b>✅ AWS 인프라 설계 및 ECS 아키텍처 구축</b>
-									<p className="text-gray-700 leading-relaxed">
+								</div>
+								<div className="bg-white p-3 rounded border border-gray-200">
+									<h6 className="font-medium text-gray-800 mb-2">✅ AWS 인프라 설계 및 ECS 아키텍처 구축</h6>
+									<p className="text-sm text-gray-600">
 										AWS 클라우드 환경에서 프로덕션 레벨의 인프라를 처음부터 설계하고 구축했습니다. VPC 네트워킹, 보안 그룹 설정, ALB를 통한 로드 밸런싱, 그리고 ECS를 중심으로 한
-										컨테이너 오케스트레이션을 경험했습니다.
+										컨테이너 오케스트레이션을 경험했습니다. ECS 클러스터 설계부터 태스크 정의 작성, 서비스 설정, Auto Scaling 구성까지 전 과정을 담당하면서 컨테이너 기반 아키텍처의
+										장점을 실감할 수 있었습니다. 특히 ECR을 통한 이미지 관리와 CloudWatch를 이용한 모니터링 체계 구축을 통해 운영 안정성을 확보했습니다.
 									</p>
-									<p className="text-gray-700 leading-relaxed">
-										ECS 클러스터 설계부터 태스크 정의 작성, 서비스 설정, Auto Scaling 구성까지 전 과정을 담당하면서 컨테이너 기반 아키텍처의 장점을 실감할 수 있었습니다. 특히
-										ECR을 통한 이미지 관리와 CloudWatch를 이용한 모니터링 체계 구축을 통해 운영 안정성을 확보했습니다.
-									</p>
-								</li>
-								<li>
-									<b>✅ 대규모 트래픽 대비 성능 최적화</b>
-									<p className="text-gray-700 leading-relaxed">
+								</div>
+								<div className="bg-white p-3 rounded border border-gray-200">
+									<h6 className="font-medium text-gray-800 mb-2">✅ 대규모 트래픽 대비 성능 최적화</h6>
+									<p className="text-sm text-gray-600">
 										서비스 확장성을 고려한 다양한 성능 최적화 기법을 실제로 구현했습니다. Redis를 활용한 다층 캐싱 전략으로 데이터베이스 부하를 크게 줄였고, 집계 테이블과 크론 작업을 통한
-										배치 처리로 실시간 업데이트의 락 경합 문제를 해결했습니다.
-									</p>
-									<p className="text-gray-700 leading-relaxed">
-										NestJS의 Bull 라이브러리와 Redis를 연동한 큐 시스템을 구축하여 비동기 작업 처리와 백그라운드 작업 스케줄링을 구현했습니다. 데이터베이스 쿼리 최적화와 인덱싱을 통해
+										배치 처리로 실시간 업데이트의 락 경합 문제를 해결했습니다. NestJS의 Bull 라이브러리와 Redis를 연동한 큐 시스템을 구축하여 비동기 작업 처리와 백그라운드 작업
+										스케줄링을 구현했습니다. 데이터베이스 쿼리 최적화와 인덱싱을 통해
 										응답 시간을 대폭 개선했으며, 동시 사용자 증가 시 발생할 수 있는 병목 지점을 사전에 식별하고 해결하는 경험을 통해 성능 엔지니어링 역량을 키울 수 있었습니다.
 									</p>
-								</li>
-								<li>
-									<b>✅ CI/CD 파이프라인 구축</b>
-									<p className="text-gray-700 leading-relaxed">
+								</div>
+								<div className="bg-white p-3 rounded border border-gray-200">
+									<h6 className="font-medium text-gray-800 mb-2">✅ CI/CD 파이프라인 구축</h6>
+									<p className="text-sm text-gray-600">
 										GitHub Actions와 AWS CodePipeline을 연동한 완전 자동화된 배포 파이프라인을 구축했습니다. 코드 커밋부터 테스트, 빌드, 배포까지의 전 과정을 자동화하여
-										개발 생산성을 크게 향상시켰습니다.
+										개발 생산성을 크게 향상시켰습니다. Docker 이미지 빌드 최적화, ECR을 통한 이미지 관리, 그리고 ECS 롤링 업데이트를 통한 무중단 배포를 구현했습니다. 특히 테스트 실패
+										시 자동 롤백, 배포 성공/실패 알림 시스템 등을 통해 안정적인 배포 환경을 만들 수 있었습니다. 이를 통해 DevOps 문화와 Infrastructure as Code의 중요성을
+										몸소 체험했습니다.
 									</p>
-									<p className="text-gray-700 leading-relaxed">
-										Docker 이미지 빌드 최적화, ECR을 통한 이미지 관리, 그리고 ECS 롤링 업데이트를 통한 무중단 배포를 구현했습니다. 특히 테스트 실패 시 자동 롤백, 배포 성공/실패
-										알림 시스템 등을 통해 안정적인 배포 환경을 만들 수 있었습니다. 이를 통해 DevOps 문화와 Infrastructure as Code의 중요성을 몸소 체험했습니다.
-									</p>
-								</li>
-							</ul>
+								</div>
+							</div>
 						</GlassmorphicCard>
 
 						<GlassmorphicCard expandable={false}>
 							<h3 className="text-xl font-semibold mb-4">배운 점</h3>
-							<ul className="space-y-3 text-gray-700">
-								<li>
-									<b>계획과 현실의 간극</b>
-									<p className="text-gray-700 leading-relaxed">
+							<div className="space-y-3">
+								<div className="bg-white p-3 rounded border border-gray-200">
+									<h6 className="font-medium text-gray-800 mb-2">계획과 현실의 간극</h6>
+									<p className="text-sm text-gray-600">
 										프로젝트를 진행하면서 가장 뼈아프게 깨달은 것은 프로젝트는 절대 내가 원하는 대로 흘러가지 않는다는 점이었습니다. 초기에 세웠던 완벽한 계획과 타임라인은 현실 앞에서 수없이
-										수정되어야 했습니다.
+										수정되어야 했습니다. 제품 기획 단계에서 명확하다고 생각했던 요구사항들이 개발 과정에서 계속 변경되었고, 예상했던 기술적 난이도와 실제 구현의 복잡성 사이에는 상당한 차이가
+										있었습니다. 이런 경험을 통해 불확실성을 전제로 한 유연한 계획 수립의 중요성을 깨달았습니다. 버퍼 시간 확보, 단계별 검증 포인트 설정, 그리고 변경에 대한 대응 계획을 미리
+										세우는 것이 얼마나 중요한지 몸소 체험했습니다.
 									</p>
-									<p className="text-gray-700 leading-relaxed">
-										제품 기획 단계에서 명확하다고 생각했던 요구사항들이 개발 과정에서 계속 변경되었고, 예상했던 기술적 난이도와 실제 구현의 복잡성 사이에는 상당한 차이가 있었습니다. 이런 경험을
-										통해 불확실성을 전제로 한 유연한 계획 수립의 중요성을 깨달았습니다. 버퍼 시간 확보, 단계별 검증 포인트 설정, 그리고 변경에 대한 대응 계획을 미리 세우는 것이 얼마나 중요한지
-										몸소 체험했습니다.
-									</p>
-								</li>
-								<li>
-									<b>팀 리더십의 어려움</b>
-									<p className="text-gray-700 leading-relaxed">
+								</div>
+								<div className="bg-white p-3 rounded border border-gray-200">
+									<h6 className="font-medium text-gray-800 mb-2">팀 리더십</h6>
+									<p className="text-sm text-gray-600">
 										기술적 도전만큼이나 어려웠던 것은 팀원들을 이끌고 나아가는 일이었습니다. 각자 다른 배경과 성향을 가진 팀원들이 하나의 목표를 향해 함께 나아가도록 하는 것은 생각보다 훨씬 복잡한
-										일이었습니다.
+										일이었습니다. 개발 진도나 품질에 대한 기준이 팀원마다 달랐고, 의사소통 방식이나 업무 스타일의 차이로 인한 갈등도 있었습니다. 특히 기술적 의견 차이가 있을 때 합의점을 찾는
+										과정에서 많은
+										시간이 소요되었고, 때로는 개발보다 커뮤니케이션에 더 많은 에너지를 쏟아야 했습니다. 이를 통해 기술 역량만큼이나 소프트 스킬의 중요성을 깨달았습니다. 명확한 커뮤니케이션,
+										팀원들의 강점 파악과 적절한 역할 분배, 그리고 무엇보다 인내심과 공감 능력이 프로젝트 성공에 얼마나 중요한지 배울 수 있었습니다.
 									</p>
-									<p className="text-gray-700 leading-relaxed">
-										개발 진도나 품질에 대한 기준이 팀원마다 달랐고, 의사소통 방식이나 업무 스타일의 차이로 인한 갈등도 있었습니다. 특히 기술적 의견 차이가 있을 때 합의점을 찾는 과정에서 많은
-										시간이 소요되었고, 때로는 개발보다 커뮤니케이션에 더 많은 에너지를 쏟아야 했습니다.
-									</p>
-									<p className="text-gray-700 leading-relaxed">
-										이를 통해 기술 역량만큼이나 소프트 스킬의 중요성을 깨달았습니다. 명확한 커뮤니케이션, 팀원들의 강점 파악과 적절한 역할 분배, 그리고 무엇보다 인내심과 공감 능력이 프로젝트
-										성공에 얼마나 중요한지 배울 수 있었습니다.
-									</p>
-								</li>
-								<li>
-									<b>기술 부채와 학습</b>
-									<p className="text-gray-700 leading-relaxed">
+								</div>
+								<div className="bg-white p-3 rounded border border-gray-200">
+									<h6 className="font-medium text-gray-800 mb-2">기술 부채와 학습</h6>
+									<p className="text-sm text-gray-600">
 										프로젝트를 진행하면서 가장 어려웠던 부분 중 하나는 아직 경험해보지 못한 구조와 패턴들로 인해 무의식적으로 기술 부채를 만들어가는 것이었습니다. 당시에는 최선이라고 생각했던
-										선택들이 나중에 유지보수의 어려움으로 이어지는 경험을 반복하면서, 소프트웨어 설계의 중요성을 뼈저리게 깨달을 수 있었습니다.
-									</p>
-									<p className="text-gray-700 leading-relaxed">
-										설계 패턴들을 이론적으로는 알고 있었지만 실제 프로젝트에서 언제 어떻게 적용해야 하는지에 대한 감각이 부족해 결국 확장성을 고려하지 않은 구조로 개발하게 되었고, 새로운 기능이
+										선택들이 나중에 유지보수의 어려움으로 이어지는 경험을 반복하면서, 소프트웨어 설계의 중요성을 뼈저리게 깨달을 수 있었습니다. 설계 패턴들을 이론적으로는 알고 있었지만 실제
+										프로젝트에서 언제 어떻게 적용해야 하는지에 대한 감각이 부족해 결국 확장성을 고려하지 않은 구조로 개발하게 되었고, 새로운 기능이
 										추가될 때 기존 코드를 대량으로 수정해야 하는 상황이 발생했습니다. 초기 테이블 설계시에도 현재 요구사항에만 집중하다 향후 확장성을 충분히 고려하지 못해 전체 구조를 재설계하기도
-										했습니다.
-									</p>
-									<p className="text-gray-700 leading-relaxed">
-										결과적으로 이런 무의식적 기술 부채들이 누적되면서 예상치 못한 사이드 이펙트를 걱정해야하는 상황이 되었습니다. 결국 몇 차례에 걸쳐 대규모 리팩토링을 진행해야했던 경험이 있습니다.
-									</p>
-									<p className="text-gray-700 leading-relaxed">
-										이런 시행착오를 겪으면서 소프트웨어 설계의 중요성과 디자인 패턴의 실용성을 깨달았습니다. 이론적으로만 알고 있던 개념들이 실제 프로젝트에서 어떤 문제를 해결하는지, 언제 적용해야
-										하는지에 대한 감각을 기를 수 있었습니다. 또한 초기 설계 단계에서 확장성을 고려하는 것의 중요성을 배웠습니다. 당장의 요구사항에만 집중하기보다 향후 변경 가능성을 염두에 두고
-										유연한 구조를 만드는 것이 결국에는 전체 개발 시간을 단축시키고 코드 품질을 높이는 길이라는 것을 경험을 통해 체득했습니다.
-									</p>
-									<p className="text-gray-700 leading-relaxed">
-										무엇보다 기술 부채를 의식적으로 관리하는 방법을 배웠습니다. 모든 코드가 처음부터 완벽할 수는 없지만, 어떤 부분이 기술 부채가 될 가능성이 있는지 인식하고, 적절한 시점에
+										했습니다. 결과적으로 이런 무의식적 기술 부채들이 누적되면서 예상치 못한 사이드 이펙트를 걱정해야하는 상황이 되었습니다. 결국 몇 차례에 걸쳐 대규모 리팩토링을 진행해야했던 경험이
+										있습니다. 이런 시행착오를 겪으면서 소프트웨어 설계의 중요성과 디자인 패턴의 실용성을 깨달았습니다. 이론적으로만 알고 있던 개념들이 실제 프로젝트에서 어떤 문제를 해결하는지, 언제
+										적용해야 하는지에 대한 감각을 기를 수 있었습니다. 또한 초기 설계 단계에서 확장성을 고려하는 것의 중요성을 배웠습니다. 당장의 요구사항에만 집중하기보다 향후 변경 가능성을 염두에
+										두고 유연한 구조를 만드는 것이 결국에는 전체 개발 시간을 단축시키고 코드 품질을 높이는 길이라는 것을 경험을 통해 체득했습니다. 무엇보다 기술 부채를 의식적으로 관리하는 방법을
+										배웠습니다. 모든 코드가 처음부터 완벽할 수는 없지만, 어떤 부분이 기술 부채가 될 가능성이 있는지 인식하고, 적절한 시점에
 										리팩토링을 계획하는 것이 중요하다는 것을 깨달았습니다.
 									</p>
-								</li>
-								<li>
-									<b>성장의 계기</b>
-									<p className="text-gray-700 leading-relaxed">
+								</div>
+								<div className="bg-white p-3 rounded border border-gray-200">
+									<h6 className="font-medium text-gray-800 mb-2">성장의 계기</h6>
+									<p className="text-sm text-gray-600">
 										이러한 어려움들은 분명 힘들었지만, 개발자로서 그리고 한 사람으로서 성장할 수 있는 귀중한 경험이었습니다. 기술적 역량뿐만 아니라 프로젝트 관리, 팀 협업, 문제 해결 방식에 대한
-										새로운 관점을 얻을 수 있었습니다.
-									</p>
-									<p className="text-gray-700 leading-relaxed">
-										특히 실패와 시행착오를 통해 배운 교훈들은 책이나 강의로는 얻을 수 없는 값진 자산이 되었습니다. 앞으로의 프로젝트에서는 이런 경험을 바탕으로 더 성숙하고 체계적인 접근을 할 수
+										새로운 관점을 얻을 수 있었습니다. 특히 실패와 시행착오를 통해 배운 교훈들은 책이나 강의로는 얻을 수 없는 값진 자산이 되었습니다. 앞으로의 프로젝트에서는 이런 경험을 바탕으로
+										더 성숙하고 체계적인 접근을 할 수
 										있을 것이라 확신합니다.
 									</p>
-								</li>
-							</ul>
+								</div>
+							</div>
 						</GlassmorphicCard>
 					</div>
 				</div>
