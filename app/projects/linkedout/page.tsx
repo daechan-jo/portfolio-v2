@@ -275,24 +275,28 @@ export default function LinkedOutPortfolio() {
 						<br/>
 						<br/>
 						<GlassmorphicCard expandable={false}>
-							{/*<h3 className="text-xl font-semibold mb-4">주요 성과</h3>*/}
-							<img src="/erd.png" alt="" style={{cursor: 'pointer', display: 'block', margin: '0 auto'}}
+							<img src="/erd.png" alt="Entity Relationship Diagram"
+									 style={{cursor: 'pointer', display: 'block', margin: '0 auto'}}
 									 onClick={() => window.open('/erd.png', '_blank')}/>
 							<br/>
-							<h3 className="text-xl font-semibold mb-4">ERD</h3>
+							<h3 className="text-xl font-semibold mb-4">데이터베이스 설계</h3>
 							<p className="text-gray-700 leading-relaxed">
-								사용자 중심의 콘텐츠 플랫폼을 위한 포괄적인 데이터베이스 아키텍처를 설계했습니다. 핵심 도메인인 에세이 작성/공유를 중심으로 사용자 관리, 소셜 기능, 콘텐츠 검색, 알림 시스템,
-								결제/구독 관리까지 통합된 40여 개 테이블로 구성되어 있습니다.
+								사용자 중심의 콘텐츠 플랫폼을 위한 체계적인 데이터베이스 아키텍처를 구현했습니다. 핵심 도메인인 에세이 작성/공유를 중심으로
+								사용자 관리, 소셜 기능, 콘텐츠 검색, 알림 시스템, 결제/구독 관리 등 40여 개의 테이블을 통합 설계했습니다.
 							</p>
 							<br/>
 							<p className="text-gray-700 leading-relaxed">
-								비즈니스 도메인별로 테이블을 논리적으로 그룹핑하여 콘텐츠(essay, story, tag), 사용자(user, follow, badge), 시스템(alert, device,
-								subscription) 영역으로 명확히 분리했습니다. 성능 최적화를 위해 aggregate 테이블을 통한 집계 데이터 관리, tsvector 컬럼 및 trigram을 활용한
-								PostgreSQL 전문
-								검색, unaccented 컬럼으로 다국어 검색 성능을 향상시켰습니다. 또한 확장성을 고려하여 deleted_date를 통한 소프트 삭제, token_version을 이용한 동시성 제어,
-								processed_history 테이블로 모든 관리자 액션에 대한 감사 추적이 가능하도록 설계했습니다.
+								비즈니스 도메인별로 테이블을 논리적으로 구조화하여 콘텐츠(essay, story, tag), 사용자(user, follow, badge), 시스템(alert, device,
+								subscription)
+								영역으로 명확하게 분리했습니다. 성능 최적화를 위해 다음과 같은 전략을 적용했습니다:
+								<br/><br/>
+								• aggregate 테이블을 통한 효율적인 집계 데이터 관리<br/>
+								• tsvector 컬럼 및 trigram 인덱스를 활용한 PostgreSQL 전문 검색 구현<br/>
+								• unaccented 컬럼을 통한 다국어 검색 성능 향상<br/>
+								• deleted_date 컬럼을 통한 소프트 삭제 구현<br/>
+								• token_version을 통한 토큰 제어<br/>
+								• processed_history 테이블을 통한 관리자 액션 감사 추적
 							</p>
-
 						</GlassmorphicCard>
 					</div>
 				</div>
@@ -542,30 +546,138 @@ export default function LinkedOutPortfolio() {
 					<div className="mt-12 space-y-8">
 						<GlassmorphicCard expandable={false}>
 							<div className="space-y-6">
-								<img src="/getessay.png" alt="" style={{cursor: 'pointer'}}
+								<img src="/getessay.png" alt="Get Essay Flow" style={{cursor: 'pointer'}}
 										 onClick={() => window.open('/getessay.png', '_blank')}/>
-								<h4 className="text-lg font-semibold text-gray-800">평판 및 트렌드</h4>
-								<p className="text-gray-700 leading-relaxed">
-									사용자 활동과 에세이의 트렌드 점수를 관리해서 플랫폼의 신뢰성과 사용자 경험을 극대화 하고, 추천 에세이 시스템 가중치에 사용했습니다.
+								<h4 className="text-xl font-semibold text-gray-800">평판 및 트렌드 시스템</h4>
+								<p className="text-gray-700 leading-relaxed mb-4">
+									초기에는 단순한 조회수 기반 노출 방식을 사용했으나, 이는 질 낮은 컨텐츠가 상위에 노출되거나
+									오래된 인기 글이 지속적으로 상단을 차지하는 문제를 야기했습니다. 이러한 한계를 극복하고
+									플랫폼의 신뢰성과 사용자 경험을 극대화하기 위해 종합적인 평판 및 트렌드 시스템을 설계했습니다.
 								</p>
+								<p className="text-gray-700 leading-relaxed mb-4">
+									본 시스템은 사용자 활동 패턴과 에세이의 다차원적 지표를 분석하여 트렌드 점수를 산출하고,
+									이를 추천 알고리즘의 핵심 가중치로 활용합니다. 자연스럽게 양질의 컨텐츠가 상위에 노출되고,
+									상대적으로 품질이 낮은 컨텐츠는 점진적으로 하위로 순위가 조정되도록 구현했습니다.
+								</p>
+								<div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg mb-4">
+									<h5 className="text-blue-800 font-medium mb-2">🎯 시스템 개발 목표</h5>
+									<div className="text-blue-700 text-sm space-y-1">
+										<p>• 단순 조회수 중심에서 벗어난 종합적 품질 평가</p>
+										<p>• 시간 경과에 따른 자연스러운 컨텐츠 순환</p>
+										<p>• 사용자 참여도 기반의 실질적 인기도 측정</p>
+										<p>• 신규 우수 컨텐츠의 적절한 노출 기회 보장</p>
+									</div>
+								</div>
+								<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+									<div className="bg-green-50 p-4 rounded-lg">
+										<h6 className="text-green-800 font-medium mb-2">📈 품질 향상 효과</h6>
+										<p className="text-green-700 text-sm">
+											양질의 컨텐츠가 자연스럽게 상위 노출되어
+											전체적인 플랫폼 품질 향상
+										</p>
+									</div>
+									<div className="bg-purple-50 p-4 rounded-lg">
+										<h6 className="text-purple-800 font-medium mb-2">🔄 컨텐츠 순환</h6>
+										<p className="text-purple-700 text-sm">
+											시간 기반 감쇠를 통한 건전한
+											컨텐츠 생태계 조성
+										</p>
+									</div>
+								</div>
 								<br/>
-								<h4 className="text-lg font-semibold text-gray-800">트렌드 점수 관리</h4>
-								<p className="text-gray-700 leading-relaxed">
-									트렌드 점수 계산 로직은 에세이의 인기도를 반영하기 위해 조회 시 점수를 증가시키고, 에세이의 최신성과 인기도를 균형있게 유지하기 위해 작성된 날짜에 따라 감쇠 계수를 적용해
-									점수가 점차 감소하도록 설계했습니다.
-								</p>
-								<p>
-									이 감쇠로직은 조회 이벤트가 발생할때마다 해당 에세이의 트렌드점수를 감소시키기 때문에 생성일로부터 7일간은 감쇠를 적용하지 않게됩니다. 예를 들어 작성된지 10일이 된 에세이에
-									조회 이벤트가 발생하게 된다면 감소율은 100 * 0.995^3 ≈ 98.5 가 됩니다. 이 때 만약 해당 에세이의 트렌드 점수가 100이였다고 가정하면 새로운 트렌드 점수는
-									98.5 + 1(조회증 가 량) = 99.5 → 99(소수점 버림) 이 됩니다.
-								</p>
 								<br/>
-								<h4 className="text-lg font-semibold text-gray-800">트렌드 및 평판 점수 처리: 집계테이블 vs 실시간 비동기</h4>
+								<h4 className="text-xl font-semibold text-gray-800">트렌드 점수 관리 알고리즘</h4>
+								<p className="text-gray-700 leading-relaxed mb-4">
+									에세이의 인기도를 정확하게 반영하기 위해 조회수 기반 점수 증가와 시간 기반 감쇠 계수를 결합한 알고리즘을 구현했습니다.
+									최신성과 인기도의 균형을 맞추기 위해 작성일 기준으로 시간이 경과할수록 점수가 감소하도록 설계했습니다.
+								</p>
+								<p className="text-gray-700 leading-relaxed mb-4">
+									이 방식을 도입한 배경은 사용자들이 컨텐츠를 조회할수록 점수가 지속적으로 증가하여 오래된 컨텐츠가
+									상위에 계속 노출되는 문제를 해결하기 위함이었습니다. 작성일이 트렌드 점수 가중치에 포함되어 있었지만,
+									보다 적극적인 감쇠 로직이 필요하다고 판단했습니다.
+								</p>
+								<div className="bg-gray-50 p-4 rounded-lg">
+									<p className="text-gray-800 font-medium mb-3">📊 감쇠 로직 상세</p>
+									<div className="space-y-2 text-gray-700">
+										<div className="flex items-center">
+											<span className="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
+											<span><strong>생성 후 7일 이내:</strong> 감쇠 미적용 (100% 유지)</span>
+										</div>
+										<div className="flex items-center">
+											<span className="w-2 h-2 bg-orange-500 rounded-full mr-3"></span>
+											<span><strong>7일 이후:</strong> 0.995^N 감쇠 계수 적용 (N = 경과일수 - 7)</span>
+										</div>
+										<div className="bg-white p-3 rounded border-l-4 border-blue-500 mt-3">
+											<p className="text-sm font-medium text-blue-800 mb-1">계산 예시</p>
+											<p className="text-sm text-gray-700">
+												작성 후 10일 경과: 100 × 0.995³ ≈ 98.5점<br/>
+												조회 시 점수 갱신: 98.5 + 1(조회 가중치) = 99.5 → 99점 (소수점 버림)
+											</p>
+										</div>
+									</div>
+								</div>
+								<br/>
+								<br/>
+								<h4 className="text-xl font-semibold text-gray-800">성능 최적화: 집계 테이블과 비동기 처리</h4>
+								<p className="text-gray-700 leading-relaxed mb-4">
+									에세이 조회 시 사용자 평판, 트렌드 점수, 상호작용 데이터 등 여러 테이블을 동시에 조회하고 변경해야 하는
+									복잡한 워크플로우로 인해 레이턴시 증가와 데이터베이스 락 경합 문제가 발생했습니다.
+								</p>
+
+								<div className="bg-gray-50 p-4 rounded-lg mb-4">
+									<h5 className="text-gray-800 font-medium mb-3">🔄 최적화 진화 과정</h5>
+
+									<div className="space-y-4">
+										<div className="border-l-4 border-red-400 pl-4">
+											<h6 className="font-medium text-red-700 mb-1">1단계: 문제 발생</h6>
+											<p className="text-sm text-red-600">
+												다중 테이블 동시 조회/변경으로 인한 성능 저하 및 락 경합 발생
+											</p>
+										</div>
+
+										<div className="border-l-4 border-yellow-400 pl-4">
+											<h6 className="font-medium text-yellow-700 mb-1">2단계: 집계 테이블 도입</h6>
+											<p className="text-sm text-yellow-600 mb-2">
+												사용자 평판과 에세이 트렌드 점수를 별도 집계 테이블로 분리하고 크론 작업으로 주기적 일괄 업데이트
+											</p>
+											<div className="bg-yellow-50 p-2 rounded text-xs text-yellow-800">
+												<strong>한계점:</strong> 실시간성이 중요한 추천 시스템에서 크론 작업 실행 전까지 더티리드 발생
+											</div>
+										</div>
+
+										<div className="border-l-4 border-green-400 pl-4">
+											<h6 className="font-medium text-green-700 mb-1">3단계: 비동기 처리 최적화</h6>
+											<p className="text-sm text-green-600">
+												집계 테이블 대신 비동기 처리 방식 채택으로 실시간성과 성능을 동시에 확보
+											</p>
+										</div>
+									</div>
+								</div>
+
+								<div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+									<div className="bg-blue-50 p-4 rounded-lg">
+										<h6 className="text-blue-800 font-medium mb-2">⚡ 성능 개선 효과</h6>
+										<ul className="text-blue-700 text-sm space-y-1">
+											<li>• 메인 조회 플로우 응답 시간 단축</li>
+											<li>• 데이터베이스 락 경합 현상 제거</li>
+											<li>• 동시 처리 능력 향상</li>
+										</ul>
+									</div>
+
+									<div className="bg-green-50 p-4 rounded-lg">
+										<h6 className="text-green-800 font-medium mb-2">🎯 데이터 정확성 보장</h6>
+										<ul className="text-green-700 text-sm space-y-1">
+											<li>• 실시간 데이터 동기화</li>
+											<li>• 더티리드 문제 해결</li>
+											<li>• 추천 시스템 정확도 향상</li>
+										</ul>
+									</div>
+								</div>
+
 								<p className="text-gray-700 leading-relaxed">
-									에세이 조회가 발생하면 평판, 트렌드, 추가 컨텐츠 추천 등 여러 테이블을 조회/변경해야 하여 레이턴시가 증가와 락 경합 문제가 발생할 수
-									있었습니다. 이를 해결하기 위해 사용자 평판과 에세이 트렌드점수를 별도의 집계테이블로 분리하고 크론 작업을 통해 주기적으로 일괄 업데이트 하는 방식을 채택했었습니다. 다만, 해당
-									데이터들은 주 기능인 추천에세이 기능에 가중치로 사용되기 때문에 보다 실시간으로 정확한 데이터를 제공되어야 되기 때문에 점수 업데이트 작업을 비동기로 처리하여 메인 조회 플로우의
-									응답속도를 보장하면서도 사용자 또는 서비스에 필요한 정확한 점수 데이터를 제공할 수 있도록 변경했습니다.
+									최종적으로 비동기 처리 방식을 통해 메인 조회 플로우를 방해하지 않으면서도
+									필요한 데이터의 정확성을 보장하고, 동시에 서비스 전반의 성능을 개선할 수 있었습니다.
+									이러한 아키텍처 개선을 통해 사용자 경험과 시스템 안정성을 모두 향상시켰습니다.
 								</p>
 							</div>
 						</GlassmorphicCard>

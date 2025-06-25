@@ -11,7 +11,12 @@ import {
 	MonitorSmartphone,
 	Heart,
 	Highlighter,
-	Search, Tag, MapPin, Lamp, BellRing, Contact
+	ShoppingCart,
+	EyeOff,
+	Truck,
+	ArrowUpFromLine,
+	BadgePercent,
+	BadgeAlert
 } from "lucide-react"
 import {Button} from "@/components/ui/button"
 import {Badge} from "@/components/ui/badge"
@@ -282,8 +287,8 @@ export default function LinkedOutPortfolio() {
 						<br/>
 						<GlassmorphicCard expandable={false}>
 							<h3 className="text-xl font-semibold mb-4">MSA</h3>
-							<img src="/erd.png" alt="" style={{cursor: 'pointer', display: 'block', margin: '0 auto'}}
-									 onClick={() => window.open('/erd.png', '_blank')}/>
+							<img src="/storemsa.png" alt="" style={{cursor: 'pointer', display: 'block', margin: '0 auto'}}
+									 onClick={() => window.open('/storemsa.png', '_blank')}/>
 							<br/>
 							<h3 className="text-xl font-semibold mb-4">독립적인 서비스</h3>
 							<p className="text-gray-700 leading-relaxed">
@@ -302,8 +307,7 @@ export default function LinkedOutPortfolio() {
 							<h3 className="text-xl font-semibold mb-4">비즈니스 로직 분리 및 확장성 고려</h3>
 							<p className="text-gray-700 leading-relaxed">
 								주요 비즈니스 로직을 각 서비스별로 분리하여 모듈화했습니다. 이러한 독립적인 구조는 특
-								정 서비스에 기능을 추가하거나 변경할 때 다른 서비스에 영향을 주지 않고 확장이 가능해집
-								니다.
+								정 서비스에 기능을 추가하거나 변경할 때 다른 서비스에 영향을 주지 않고 확장이 가능해집니다.
 							</p>
 						</GlassmorphicCard>
 
@@ -317,48 +321,72 @@ export default function LinkedOutPortfolio() {
 							</p>
 							<p className="text-gray-700 leading-relaxed">
 								일반적인 비동기 메시지를 소비만하는 경우를 제외하고 동기식이 필요하거나 브라우저 조작을 통한 크롤링
-								작업이 필요한 경우를 해결하기 위해 BullMQ 기반의 작업 큐를 추가로 사용해 설계했
-								습니다.
+								작업이 필요한 경우를 해결하기 위해 BullMQ 기반의 작업 큐를 추가로 사용해 설계했습니다.
 							</p>
 							<br/>
 							<p className="text-gray-700 leading-relaxed">
-								서비스 내부에서 처리되는 메시지는 크게 두 가지 기준을 가지고 분리됩니다.
+								서비스 내부에서 처리되는 메시지는 크게 두 가지 기준을 가지고 분리되며 경우에 따라 추가적인 큐를 사용해 분리 실행합니다..
 							</p>
 							<ul className="space-y-2 text-sm text-gray-600">
 								<li>
 									• 메시지 소비 방식에 따른 분리: 단순히 구독/소비만 하고 생성자에게 응답이 필요 없는 경우와 생성자에게 응답이 필요한 경우
 								</li>
-								<li>• 동기적/비동기적 처리 방식에 따른 분리: 비동기적으로 병렬 처리를 해야하는 경우와 순차적으로 실행되어야 하는 경우</li>
+								<li>
+									• 동기적/비동기적 처리 방식에 따른 분리: 비동기적으로 병렬 처리를 해야하는 경우와 순차적으로 실행되어야 하는 경우
+								</li>
 							</ul>
 							<br/>
-							<h3 className="text-xl font-semibold mb-4">비즈니스 로직 분리 및 확장성 고려</h3>
+							<h3 className="text-xl font-semibold mb-4">두개의 큐</h3>
 							<p className="text-gray-700 leading-relaxed">
-								주요 비즈니스 로직을 각 서비스별로 분리하여 모듈화했습니다. 이러한 독립적인 구조는 특
-								정 서비스에 기능을 추가하거나 변경할 때 다른 서비스에 영향을 주지 않고 확장이 가능해집
-								니다.
-							</p>
-						</GlassmorphicCard>
-
-						<br/>
-						<br/>
-						<GlassmorphicCard expandable={false}>
-							{/*<h3 className="text-xl font-semibold mb-4">주요 성과</h3>*/}
-							<img src="/erd.png" alt="" style={{cursor: 'pointer', display: 'block', margin: '0 auto'}}
-									 onClick={() => window.open('/erd.png', '_blank')}/>
-							<br/>
-							<h3 className="text-xl font-semibold mb-4">ERD</h3>
-							<p className="text-gray-700 leading-relaxed">
-								사용자 중심의 콘텐츠 플랫폼을 위한 포괄적인 데이터베이스 아키텍처를 설계했습니다. 핵심 도메인인 에세이 작성/공유를 중심으로 사용자 관리, 소셜 기능, 콘텐츠 검색, 알림 시스템,
-								결제/구독 관리까지 통합된 40여 개 테이블로 구성되어 있습니다.
+								RabbitMQ는 마이크로서비스 간의 직접적인 HTTP 호출보다 빠르고, 비동기 메시지를 기반으로 서비스를 느스하게 결합해 유지할 수 있도록 하기 위해 사용되었습니다. 다만 일부
+								작업(크롤링, 대량 데이터 처리 등)은 메시지 소비 방식을 관리해야하는 경우가 있었습니다. RabbitMQ는 단순히 메시지 브로커 역할을 수행하기때문에 일부 작업을 순차적으로 실행할 수
+								있는 기능이 부족했습니다. 이를 해결하기 위해 BullMQ를 추가해 크롤링같은 작업을 FIFO 방식으로 순차적으로 실행할 수 있도록 설계했습니다.
 							</p>
 							<br/>
-							<p className="text-gray-700 leading-relaxed">
-								비즈니스 도메인별로 테이블을 논리적으로 그룹핑하여 콘텐츠(essay, story, tag), 사용자(user, follow, badge), 시스템(alert, device,
-								subscription) 영역으로 명확히 분리했습니다. 성능 최적화를 위해 aggregate 테이블을 통한 집계 데이터 관리, tsvector 컬럼 및 trigram을 활용한
-								PostgreSQL 전문
-								검색, unaccented 컬럼으로 다국어 검색 성능을 향상시켰습니다. 또한 확장성을 고려하여 deleted_date를 통한 소프트 삭제, token_version을 이용한 동시성 제어,
-								processed_history 테이블로 모든 관리자 액션에 대한 감사 추적이 가능하도록 설계했습니다.
-							</p>
+							<table className="border-collapse border border-gray-300">
+								<thead>
+								<tr>
+									<th scope="col" colSpan={2} className="border border-gray-300 p-2">패턴유형</th>
+									<th scope="col" className="border border-gray-300 p-2">설명</th>
+									<th scope="col" className="border border-gray-300 p-2">처리방식</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td rowSpan={2} className="border border-gray-300 p-2">단순 소비 메시지</td>
+									<td className="border border-gray-300 p-2">동기 작업</td>
+									<td className="border border-gray-300 p-2">
+										결과 반환은 필요 없으나 순차적으로
+										처리해야하는 작업
+									</td>
+									<td className="border border-gray-300 p-2">BullMQ에서 처리</td>
+								</tr>
+								<tr>
+									<td className="border border-gray-300 p-2">비동기 작업</td>
+									<td className="border border-gray-300 p-2">
+										결과 반환은 필요 없고 병렬처리 가능한
+										작업
+									</td>
+									<td className="border border-gray-300 p-2">즉시 소비</td>
+								</tr>
+								<tr>
+									<td rowSpan={2} className="border border-gray-300 p-2">응답이 필요한 메시지</td>
+									<td className="border border-gray-300 p-2">동기 작업</td>
+									<td className="border border-gray-300 p-2">
+										반환 데이터가 있고 순차적으로
+										처리해야하는 작업
+									</td>
+									<td className="border border-gray-300 p-2">BullMQ에 처리 후 반환</td>
+								</tr>
+								<tr>
+									<td className="border border-gray-300 p-2">비동기 작업</td>
+									<td className="border border-gray-300 p-2">
+										반환 데이터가 있고 병렬처리 가능한 작업
+									</td>
+									<td className="border border-gray-300 p-2">즉시 소비 후 반환</td>
+								</tr>
+								</tbody>
+							</table>
 						</GlassmorphicCard>
 					</div>
 				</div>
@@ -378,11 +406,11 @@ export default function LinkedOutPortfolio() {
 						>
 							<GlassmorphicCard expandable={false} className="h-full">
 								<div className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center mb-4">
-									<Code2 className="h-6 w-6 text-gray-600"/>
+									<ShoppingCart className="h-6 w-6 text-gray-600"/>
 								</div>
-								<h3 className="text-lg font-semibold mb-2">깔끔한 에디터</h3>
+								<h3 className="text-lg font-semibold mb-2">자동 발주</h3>
 								<p className="text-gray-600">
-									마크다운 기반의 심플한 에디터로 글쓰기에만 집중할 수 있습니다.
+									주문의 상품, 수량, 수취인 정보 등을 추출해 상태변경부터 발주까지 자동으로 진행합니다.
 								</p>
 							</GlassmorphicCard>
 						</motion.div>
@@ -395,11 +423,11 @@ export default function LinkedOutPortfolio() {
 						>
 							<GlassmorphicCard expandable={false} className="h-full">
 								<div className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center mb-4">
-									<Users className="h-6 w-6 text-gray-600"/>
+									<EyeOff className="h-6 w-6 text-gray-600"/>
 								</div>
-								<h3 className="text-lg font-semibold mb-2">익명성 보장</h3>
+								<h3 className="text-lg font-semibold mb-2">품절 관리</h3>
 								<p className="text-gray-600">
-									작성자의 신원보다 글의 내용에 집중할 수 있도록 익명 옵션을 제공합니다.
+									도매사이트의 품절 상태를 실시간으로 감지하여 자동으로 노출을 제한합니다.
 								</p>
 							</GlassmorphicCard>
 						</motion.div>
@@ -412,11 +440,11 @@ export default function LinkedOutPortfolio() {
 						>
 							<GlassmorphicCard expandable={false} className="h-full">
 								<div className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center mb-4">
-									<ExternalLink className="h-6 w-6 text-gray-600"/>
+									<Truck className="h-6 w-6 text-gray-600"/>
 								</div>
-								<h3 className="text-lg font-semibold mb-2">읽기 최적화</h3>
+								<h3 className="text-lg font-semibold mb-2">배송 관리</h3>
 								<p className="text-gray-600">
-									산만함 없는 깔끔한 인터페이스로 독서에 몰입할 수 있습니다.
+									도매처의 상품 배송을 추적해 각 플랫폼의 배송상태를 업데이트합니다.
 								</p>
 							</GlassmorphicCard>
 						</motion.div>
@@ -429,11 +457,11 @@ export default function LinkedOutPortfolio() {
 						>
 							<GlassmorphicCard expandable={false} className="h-full">
 								<div className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center mb-4">
-									<MonitorSmartphone className="h-6 w-6 text-gray-600"/>
+									<ArrowUpFromLine className="h-6 w-6 text-gray-600"/>
 								</div>
-								<h3 className="text-lg font-semibold mb-2">멀티 플랫폼 지원</h3>
+								<h3 className="text-lg font-semibold mb-2">간편 상품 등록</h3>
 								<p className="text-gray-600">
-									Window, MAC, Android, iOS 등 여러 운영체제와 디바이스에서 동기화를 제공합니다.
+									도매사이트의 상품 정보를 대량으로 자동 수집하여 스마트스토어에 등록합니다.
 								</p>
 							</GlassmorphicCard>
 						</motion.div>
@@ -446,11 +474,11 @@ export default function LinkedOutPortfolio() {
 						>
 							<GlassmorphicCard expandable={false} className="h-full">
 								<div className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center mb-4">
-									<Heart className="h-6 w-6 text-gray-600"/>
+									<BadgePercent className="h-6 w-6 text-gray-600"/>
 								</div>
-								<h3 className="text-lg font-semibold mb-2">Recommendation system</h3>
+								<h3 className="text-lg font-semibold mb-2">자동 가격 경쟁</h3>
 								<p className="text-gray-600">
-									사용자의 최근 활동 데이터를 수집해 여러 가중치를 반영하여 개인화된 콘텐츠를 추천합니다.
+									경쟁사의 가격을 실시간으로 모니터링하고 설정한 조건에 따라 자동으로 가격을 조정해 매출을 극대화합니다.
 								</p>
 							</GlassmorphicCard>
 						</motion.div>
@@ -463,140 +491,15 @@ export default function LinkedOutPortfolio() {
 						>
 							<GlassmorphicCard expandable={false} className="h-full">
 								<div className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center mb-4">
-									<Highlighter className="h-6 w-6 text-gray-600"/>
+									<BadgeAlert className="h-6 w-6 text-gray-600"/>
 								</div>
-								<h3 className="text-lg font-semibold mb-2">가이드라인 지원</h3>
+								<h3 className="text-lg font-semibold mb-2">자동 문제상품 감지</h3>
 								<p className="text-gray-600">
-									가볍게 글쓰기를 시작할 수 있게 매일 바뀌는 주제와 이미지 및 가이드라인을 제공합니다.
+									가품, 금지품목, 허위 정보 등 문제가 있는 상품을 감지해 차단하여 판매자 점수를 유지합니다.
 								</p>
 							</GlassmorphicCard>
 						</motion.div>
 					</div>
-
-					{/* 더보기 버튼 - 카드 아래에 별도로 배치 */}
-					<div className="mt-8 text-center">
-						<button
-							onClick={() => setIsExpanded(!isExpanded)}
-							className="inline-flex items-center justify-center gap-2 py-3 px-6 rounded-lg text-sm font-medium transition-all duration-200 group"
-						>
-							<span
-								className="text-gray-400 group-hover:text-gray-400 transition-colors duration-500 animate-pulse text-lg">
-  							{isExpanded ? "접기" : "More"}
-							</span>
-							<motion.div animate={{rotate: isExpanded ? 180 : 0}} transition={{duration: 0.2}}>
-								<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-									<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7"/>
-								</svg>
-							</motion.div>
-						</button>
-					</div>
-
-					{/* 확장 가능한 추가 정보 */}
-					{isExpanded && (
-						<div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
-							<motion.div
-								initial={{opacity: 0, y: 20}}
-								whileInView={{opacity: 1, y: 0}}
-								transition={{duration: 0.5, delay: 0.1}}
-								viewport={{once: true}}
-							>
-								<GlassmorphicCard expandable={false} className="h-full">
-									<div className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center mb-4">
-										<Search className="h-6 w-6 text-gray-600"/>
-									</div>
-									<h3 className="text-lg font-semibold mb-2">검색</h3>
-									<p className="text-gray-600">
-										유사도 기반 검색으로 원하는 콘텐츠를 빠르게 찾을 수 있습니다.
-									</p>
-								</GlassmorphicCard>
-							</motion.div>
-
-							<motion.div
-								initial={{opacity: 0, y: 20}}
-								whileInView={{opacity: 1, y: 0}}
-								transition={{duration: 0.5, delay: 0.2}}
-								viewport={{once: true}}
-							>
-								<GlassmorphicCard expandable={false} className="h-full">
-									<div className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center mb-4">
-										<Tag className="h-6 w-6 text-gray-600"/>
-									</div>
-									<h3 className="text-lg font-semibold mb-2">뱃지</h3>
-									<p className="text-gray-600">
-										에세이 작성 시 사용한 태그를 기반으로 다양한 뱃지를 획득할 수 있는 재미있는 이벤트 시스템입니다.
-									</p>
-								</GlassmorphicCard>
-							</motion.div>
-
-							<motion.div
-								initial={{opacity: 0, y: 20}}
-								whileInView={{opacity: 1, y: 0}}
-								transition={{duration: 0.5, delay: 0.3}}
-								viewport={{once: true}}
-							>
-								<GlassmorphicCard expandable={false} className="h-full">
-									<div className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center mb-4">
-										<MapPin className="h-6 w-6 text-gray-600"/>
-									</div>
-									<h3 className="text-lg font-semibold mb-2">위치기반</h3>
-									<p className="text-gray-600">
-										위치 정보를 활용한 지역 기반의 맞춤형 콘텐츠를 제공합니다.
-									</p>
-								</GlassmorphicCard>
-							</motion.div>
-
-							<motion.div
-								initial={{opacity: 0, y: 20}}
-								whileInView={{opacity: 1, y: 0}}
-								transition={{duration: 0.5, delay: 0.3}}
-								viewport={{once: true}}
-							>
-								<GlassmorphicCard expandable={false} className="h-full">
-									<div className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center mb-4">
-										<Lamp className="h-6 w-6 text-gray-600"/>
-									</div>
-									<h3 className="text-lg font-semibold mb-2">책상 꾸미기</h3>
-									<p className="text-gray-600">
-										홈 화면의 책상을 다양한 아이템으로 꾸미고 커스터마이징할 수 있습니다.
-									</p>
-								</GlassmorphicCard>
-							</motion.div>
-
-							<motion.div
-								initial={{opacity: 0, y: 20}}
-								whileInView={{opacity: 1, y: 0}}
-								transition={{duration: 0.5, delay: 0.3}}
-								viewport={{once: true}}
-							>
-								<GlassmorphicCard expandable={false} className="h-full">
-									<div className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center mb-4">
-										<Contact className="h-6 w-6 text-gray-600"/>
-									</div>
-									<h3 className="text-lg font-semibold mb-2">소셜</h3>
-									<p className="text-gray-600">
-										최소한으로 제한된 소셜 기능으로, 비공개 구독을 통해 관심 있는 작가를 팔로우할 수 있습니다.
-									</p>
-								</GlassmorphicCard>
-							</motion.div>
-
-							<motion.div
-								initial={{opacity: 0, y: 20}}
-								whileInView={{opacity: 1, y: 0}}
-								transition={{duration: 0.5, delay: 0.3}}
-								viewport={{once: true}}
-							>
-								<GlassmorphicCard expandable={false} className="h-full">
-									<div className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center mb-4">
-										<BellRing className="h-6 w-6 text-gray-600"/>
-									</div>
-									<h3 className="text-lg font-semibold mb-2">푸쉬알림</h3>
-									<p className="text-gray-600">
-										리마인드, 에세이 첫 조회 알림 등 다양한 맞춤형 푸시 알림을 제공합니다.
-									</p>
-								</GlassmorphicCard>
-							</motion.div>
-						</div>
-					)}
 				</div>
 			</section>
 
