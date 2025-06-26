@@ -1296,12 +1296,19 @@ export default function LinkedOutPortfolio() {
 
 								<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 									<div className="bg-gray-50 p-4 rounded-lg">
-										<h4 className="text-lg font-medium text-gray-800 mb-3">기술적 성과</h4>
 										<div className="space-y-3">
 											<div className="bg-white p-3 rounded border border-gray-200">
 												<h5 className="font-medium text-gray-800 mb-2">아키텍처 진화</h5>
 												<p className="text-sm text-gray-600">
 													모놀리식에서 MSA로 성공적 전환을 통해 시스템 확장성과 유지보수성을 대폭 향상시켰습니다.
+												</p>
+											</div>
+
+											<div className="bg-white p-3 rounded border border-gray-200">
+												<h5 className="font-medium text-gray-800 mb-2">비동기 메시징 통신</h5>
+												<p className="text-sm text-gray-600">
+													서비스 간 HTTP 통신 대신 RabbitMQ 기반 비동기 메시징을 도입하여
+													느슨한 결합과 높은 확장성을 확보했습니다.
 												</p>
 											</div>
 
@@ -1322,7 +1329,6 @@ export default function LinkedOutPortfolio() {
 									</div>
 
 									<div className="bg-gray-50 p-4 rounded-lg">
-										<h4 className="text-lg font-medium text-gray-800 mb-3">비즈니스 성과</h4>
 										<div className="space-y-3">
 											<div className="bg-white p-3 rounded border border-gray-200">
 												<h5 className="font-medium text-gray-800 mb-2">데이터 수집 자동화</h5>
@@ -1341,35 +1347,10 @@ export default function LinkedOutPortfolio() {
 											<div className="bg-white p-3 rounded border border-gray-200">
 												<h5 className="font-medium text-gray-800 mb-2">운영 효율성</h5>
 												<p className="text-sm text-gray-600">
-													무중단 배포와 자동 스케일링을 통해 서비스 안정성과 가용성을 확보했습니다.
+													Kubernetes 기반 컨테이너 오케스트레이션과 무중단 배포를 통해
+													서비스 안정성과 가용성을 확보했습니다.
 												</p>
 											</div>
-										</div>
-									</div>
-								</div>
-
-								<div className="bg-gray-50 p-4 rounded-lg">
-									<h4 className="text-lg font-medium text-gray-800 mb-3">정량적 성과</h4>
-									<div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-										<div className="bg-white p-3 rounded border border-gray-200 text-center">
-											<h5 className="font-medium text-gray-800 mb-1">시스템 안정성</h5>
-											<p className="text-sm text-gray-600">99.9%</p>
-											<p className="text-xs text-gray-500">서비스 가용성</p>
-										</div>
-										<div className="bg-white p-3 rounded border border-gray-200 text-center">
-											<h5 className="font-medium text-gray-800 mb-1">성능 개선</h5>
-											<p className="text-sm text-gray-600">10,000배</p>
-											<p className="text-xs text-gray-500">검색 속도 향상</p>
-										</div>
-										<div className="bg-white p-3 rounded border border-gray-200 text-center">
-											<h5 className="font-medium text-gray-800 mb-1">부하 처리</h5>
-											<p className="text-sm text-gray-600">800 VUs</p>
-											<p className="text-xs text-gray-500">동시 접속 처리</p>
-										</div>
-										<div className="bg-white p-3 rounded border border-gray-200 text-center">
-											<h5 className="font-medium text-gray-800 mb-1">에러율</h5>
-											<p className="text-sm text-gray-600">0.02%</p>
-											<p className="text-xs text-gray-500">요청 실패율</p>
 										</div>
 									</div>
 								</div>
@@ -1436,26 +1417,6 @@ export default function LinkedOutPortfolio() {
 												<p className="text-sm text-gray-600">
 													CI/CD와 모니터링 자동화가 단순한 편의성을 넘어서
 													서비스 품질과 안정성에 미치는 영향을 실감했습니다.
-												</p>
-											</div>
-										</div>
-									</div>
-
-									<div className="bg-gray-50 p-4 rounded-lg">
-										<h4 className="text-lg font-medium text-gray-800 mb-3">개발 철학 및 접근법</h4>
-										<div className="space-y-3">
-											<div className="bg-white p-3 rounded border border-gray-200">
-												<h5 className="font-medium text-gray-800 mb-2">사용자 경험 중심 설계</h5>
-												<p className="text-sm text-gray-600">
-													기술적 우수성보다 실제 사용자가 체감하는 가치를 우선하는 개발 접근법의 중요성을
-													토큰 갱신 시스템 개선을 통해 체험했습니다.
-												</p>
-											</div>
-											<div className="bg-white p-3 rounded border border-gray-200">
-												<h5 className="font-medium text-gray-800 mb-2">문제 해결 역량</h5>
-												<p className="text-sm text-gray-600">
-													복잡한 기술적 문제를 단계별로 분석하고 체계적으로 해결하는
-													문제 해결 프로세스를 정립할 수 있었습니다.
 												</p>
 											</div>
 										</div>
