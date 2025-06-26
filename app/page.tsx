@@ -394,8 +394,8 @@ export default function Portfolio() {
 							tags={["NestJS", "Puppeteer", "MSA", "K8s"]}
 							image="/store-img.png?height=400&width=600"
 							demoUrl="/projects/store-automation"
-							repoUrl="https://github.com/daechan-jo/store-automation"
-							disabled={true}
+							repoUrl="https://github.com/daechan-jo/auto-store"
+							disabled={false}
 						/>
 						<ProjectCard
 							title="Spring WebFlux MSA Architecture"
