@@ -403,8 +403,8 @@ export default function Portfolio() {
 							tags={["Spring WebFlux", "R2DBC", "RabbitMQ", "MSA"]}
 							image="/webflux-img.png?height=400&width=600"
 							demoUrl="/projects/webflux-msa"
-							repoUrl="https://github.com/daechan-jo/webflux-msa"
-							disabled={true}
+							repoUrl="https://github.com/daechan-jo/spring-asynchronous-msa-architecture"
+							disabled={false}
 						/>
 					</div>
 				</div>
