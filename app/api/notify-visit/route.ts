@@ -38,7 +38,7 @@ export async function POST(request: NextRequest) {
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #333;">새로운 방문자</h2>
           <div style="background: #f5f5f5; padding: 20px; border-radius: 8px;">
-            <p><strong>📅 방문 시간:</strong> ${new Date(timestamp).toLocaleString('ko-KR')}</p>
+          <p><strong>📅 방문 시간:</strong> ${new Date(timestamp).toLocaleString('ko-KR', {timeZone: 'Asia/Seoul'})}</p>
             <p><strong>📍 페이지:</strong> ${page}</p>
             <p><strong>🌐 브라우저:</strong> ${userAgent}</p>
             <p><strong>📍 IP:</strong> ${request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || 'unknown'}</p>
