@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import {ArrowRight, Github, Linkedin, Mail, Twitter, Code, Database, Cloud, Wrench, Highlighter} from "lucide-react"
+import {ArrowRight, Github, Mail, Code, Database, Cloud, Wrench} from "lucide-react"
 
 import {Button} from "@/components/ui/button"
 import {ProjectCard} from "@/components/project-card"
@@ -9,17 +9,78 @@ import {SkillCategory} from "@/components/skill-category"
 import {Timeline} from "@/components/timeline"
 import {ContactForm} from "@/components/contact-form"
 import {CreativeHero} from "@/components/creative-hero"
-import {FloatingNav} from "@/components/floating-nav"
 import {MouseFollower} from "@/components/mouse-follower"
 import {ScrollProgress} from "@/components/scroll-progress"
 import {SectionHeading} from "@/components/section-heading"
 import {GlassmorphicCard} from "@/components/glassmorphic-card"
 import "./globals.css"
 import {motion} from "framer-motion"
-import {useState} from "react";
+import {JSX, useState, useEffect} from "react";
 
-export default function Portfolio() {
+
+// 방문 데이터 타입 정의
+interface VisitNotificationData {
+	page: string;
+	userAgent: string;
+	timestamp: string;
+}
+
+// 봇 감지 함수
+const isBot = (userAgent: string): boolean => {
+	const botPatterns: RegExp[] = [
+		/bot/i, /crawler/i, /spider/i, /scraper/i,
+		/googlebot/i, /bingbot/i, /facebookexternalhit/i,
+		/twitterbot/i, /linkedinbot/i, /slackbot/i
+	];
+	return botPatterns.some(pattern => pattern.test(userAgent));
+};
+
+export default function Portfolio(): JSX.Element {
 	const [isExpanded, setIsExpanded] = useState(false)
+
+	// 방문자 알림 기능
+	useEffect(() => {
+		const notifyVisit = async (): Promise<void> => {
+			try {
+				// 봇이면 알림 안 보냄
+				if (isBot(navigator.userAgent)) {
+					console.log('Bot detected, skipping notification');
+					return;
+				}
+
+				const visitData: VisitNotificationData = {
+					page: window.location.pathname + window.location.search,
+					userAgent: navigator.userAgent,
+					timestamp: new Date().toISOString(),
+				};
+
+				const response = await fetch('/api/notify-visit', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify(visitData),
+				});
+
+				if (!response.ok) {
+					throw new Error(`HTTP error! status: ${response.status}`);
+				}
+
+				const result = await response.json();
+				console.log('방문 알림 전송 성공:', result);
+			} catch (error) {
+				// 에러가 나도 사용자 경험에는 영향 없게
+				console.error('알림 전송 실패:', error);
+			}
+		};
+
+		// 컴포넌트 마운트 후 약간의 딜레이를 두고 실행
+		const timeoutId = setTimeout(notifyVisit, 1000);
+
+		// 클린업 함수
+		return () => clearTimeout(timeoutId);
+	}, []);
+
 
 	return (
 		<div className="min-h-screen bg-gradient-to-b from-gray-50 via-white to-gray-100 text-gray-900 overflow-hidden">
