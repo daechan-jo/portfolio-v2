@@ -383,8 +383,7 @@ export default function LinkedOutPortfolio() {
 								영역으로 명확하게 분리했습니다. 성능 최적화를 위해 다음과 같은 전략을 적용했습니다:
 								<br/><br/>
 								• aggregate 테이블을 통한 효율적인 집계 데이터 관리<br/>
-								• tsvector 컬럼 및 trigram 인덱스를 활용한 PostgreSQL 전문 검색 구현<br/>
-								• unaccented 컬럼을 통한 다국어 검색 성능 향상<br/>
+								• trigram과 GIN 인덱스를 활용한 PostgreSQL 전문 검색 구현<br/>
 								• deleted_date 컬럼을 통한 소프트 삭제 구현<br/>
 								• token_version을 통한 토큰 제어<br/>
 								• processed_history 테이블을 통한 관리자 액션 감사 추적
@@ -948,7 +947,7 @@ export default function LinkedOutPortfolio() {
 										검색</h4>
 									<p className="text-gray-700 leading-relaxed mb-4">
 										대용량 텍스트 데이터에서 LIKE 방식의 성능 한계를 해결하기 위해 PostgreSQL의 Trigram 기반 검색을 도입했습니다.
-										기존 LIKE 검색의 O(n) 시간 복잡도에서 벗어나 인덱스 기반 검색으로 대폭적인 성능 향상을 달성했습니다.
+										기존 LIKE 검색의 O(n) 시간 복잡도에서 벗어나 인덱스 기반 검색으로 O(log n)성능 향상을 달성했습니다.
 									</p>
 
 									<div className="bg-gray-50 p-4 rounded-lg mb-4">
@@ -973,7 +972,7 @@ export default function LinkedOutPortfolio() {
 										<div className="bg-gray-50 p-4 rounded-lg">
 											<h6 className="text-gray-800 font-medium mb-2">성능 개선 효과</h6>
 											<ul className="text-gray-600 text-sm space-y-1">
-												<li>• LIKE 검색 대비 약 10,000배 성능 향상</li>
+												<li>• 1만 레코드에서 LIKE 검색 대비 약 7-800배 성능 향상</li>
 												<li>• 수백만 건 문서에서 밀리초 단위 응답</li>
 												<li>• 메모리 사용량 최적화</li>
 											</ul>
